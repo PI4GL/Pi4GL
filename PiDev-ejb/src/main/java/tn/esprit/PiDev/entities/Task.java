@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -23,6 +24,28 @@ public class Task implements Serializable{
     private Status status;
     private static final long serialVersionUID = 1L;
     
+    @OneToMany(mappedBy="task")
+    private List<WorkedOn> workedOn;
+    
+    
+    
+	public List<WorkedOn> getWorkedOn() {
+		return workedOn;
+	}
+	public void setWorkedOn(List<WorkedOn> workedOn) {
+		this.workedOn = workedOn;
+	}
+	@ManyToOne
+	private Project project;
+	
+	
+    
+	public Project getProject() {
+		return project;
+	}
+	public void setProject(Project project) {
+		this.project = project;
+	}
 	public Task() {
 		super();
 		// TODO Auto-generated constructor stub

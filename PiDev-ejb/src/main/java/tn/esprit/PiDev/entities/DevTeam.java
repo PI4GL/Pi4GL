@@ -1,13 +1,20 @@
 package tn.esprit.PiDev.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class DevTeam implements Serializable {
@@ -16,7 +23,36 @@ public class DevTeam implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTeam ;
 	
+	@OneToMany(mappedBy = "devTeam", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.EAGER)
+	private List<Employe> employe = new ArrayList<>();
 	
+	@ManyToMany
+	private List<Project> project;
+	
+	
+
+	
+	
+	public List<Employe> getEmploye() {
+		return employe;
+	}
+
+	public void setEmploye(List<Employe> employe) {
+		this.employe = employe;
+	}
+
+	
+
+	public List<Project> getProject() {
+		return project;
+	}
+
+	public void setProject(List<Project> project) {
+		this.project = project;
+	}
+
+
+
 	private String technologie;
 	
 	private static final long serialVersionUID = 1L;

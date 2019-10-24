@@ -1,12 +1,19 @@
 package tn.esprit.PiDev.entities;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -20,12 +27,33 @@ public class Project implements Serializable {
 	private Date LaunchedOn;
 	private Date DeadLine;
 	
+	
+	
 	private static final long serialVersionUID = 1L;
 	
+	@ManyToMany(mappedBy="project" )
+	private List<DevTeam> devTeam = new ArrayList<>(); ;
+	
+	@OneToMany(mappedBy = "project", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.EAGER)
+	private List<Task> task = new ArrayList<>();
 	
 	
 	
 	
+	
+	
+	public List<Task> getTask() {
+		return task;
+	}
+	public void setTask(List<Task> task) {
+		this.task = task;
+	}
+	public List<DevTeam> getDevTeam() {
+		return devTeam;
+	}
+	public void setDevTeam(List<DevTeam> devTeam) {
+		this.devTeam = devTeam;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
