@@ -2,11 +2,15 @@ package tn.esprit.PiDev.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Formation implements Serializable{
@@ -21,9 +25,19 @@ public class Formation implements Serializable{
 	private Date dateDebut;
 	private Date dateFin;
 	
+	@OneToMany(mappedBy="formation")
+	private List<Test> test;
+	
+	/*@ManyToMany
+	private List<Employe> employe;*/
+	
+	@ManyToOne
+	private Former former;
+	
 	public Formation() {
 		
 	}
+	
 
 	public Integer getIdFormation() {
 		return idFormation;
@@ -68,7 +82,38 @@ public class Formation implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+	/*public List<Employe> getEmploye() {
+		return employe;
+	}
+
+
+	public void setEmploye(List<Employe> employe) {
+		this.employe = employe;
+	}*/
+
+
+	public Former getFormer() {
+		return former;
+	}
+
+
+	public void setFormer(Former former) {
+		this.former = former;
+	}
+
+
+	public List<Test> getTest() {
+		return test;
+	}
+
+
+	public void setTest(List<Test> test) {
+		this.test = test;
+	}
 	
 		
+	
 
 }

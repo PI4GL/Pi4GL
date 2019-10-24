@@ -1,12 +1,17 @@
 package tn.esprit.PiDev.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Former implements Serializable{
@@ -19,6 +24,9 @@ public class Former implements Serializable{
 	private String specialty;
 	private String nameFormer;
 	private String lastNameFormer;
+	
+	@OneToMany(mappedBy="former", cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+	private List<Formation> formation = new ArrayList<Formation>();
 	
 	
 	public Former() {
@@ -69,7 +77,18 @@ public class Former implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-		
 
+
+	public List<Formation> getFormation() {
+		return formation;
+	}
+
+
+	public void setFormation(List<Formation> formation) {
+		this.formation = formation;
+	}
+		
+	
+	
 	
 }
