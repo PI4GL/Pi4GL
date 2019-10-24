@@ -1,6 +1,6 @@
 package tn.esprit.PiDev.entities;
 
-public enum Status {
+public enum StatusF {
 	Inprogress,Rejected,Accepted;
 
 }

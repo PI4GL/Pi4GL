@@ -22,7 +22,7 @@ public class Demande implements Serializable {
 	private float expenses ;
 	
 	@Enumerated(EnumType.STRING)
-    private Status status;
+    private StatusF statusF;
 	private Date reservationDate ; 
 	private String ticketImg ;
 	private String description;
@@ -43,11 +43,11 @@ public class Demande implements Serializable {
 	public void setExpenses(float expenses) {
 		this.expenses = expenses;
 	}
-	public Status getStatus() {
-		return status;
+	public StatusF getStatus() {
+		return statusF;
 	}
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(StatusF statusF) {
+		this.statusF = statusF;
 	}
 	public Date getReservationDate() {
 		return reservationDate;
@@ -81,12 +81,12 @@ public class Demande implements Serializable {
 	}
 	
 
-	public Demande(int idDe, float expenses, Status status, Date reservationDate, String ticketImg, String description,
+	public Demande(int idDe, float expenses, StatusF statusF, Date reservationDate, String ticketImg, String description,
 			String missionAdress, float otherExpenses) {
 		super();
 		this.idDe = idDe;
 		this.expenses = expenses;
-		this.status = status;
+		this.statusF = statusF;
 		this.reservationDate = reservationDate;
 		this.ticketImg = ticketImg;
 		this.description = description;
