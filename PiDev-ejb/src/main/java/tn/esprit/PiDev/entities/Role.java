@@ -1,7 +1,7 @@
 package tn.esprit.PiDev.entities;
 
 public enum Role {
-	RH,
+	RH,Former,
 	Manager,
 	Developper;
 
