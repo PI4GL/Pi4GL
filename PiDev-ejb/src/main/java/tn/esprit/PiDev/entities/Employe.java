@@ -24,6 +24,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Employe implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,11 +41,15 @@ public class Employe implements Serializable {
 	private Date hiringDate;
 	private float salary;
 	
+	@OneToMany(mappedBy="employe")
+	private List<Test> test;
+	
 	
 	@OneToMany(mappedBy="employe")
 	private List<WorkedOn> workedOn;
 	
-	
+	/*@ManyToMany(mappedBy="employe")
+	private List<Formation> formation = new ArrayList<Formation>();*/
 	
 	
 	
@@ -166,8 +173,30 @@ public class Employe implements Serializable {
 	}
 
 	public Employe() {
-		super();
-		// TODO Auto-generated constructor stub
+		
+		
 	}
+/*
+	public List<Formation> getFormation() {
+		return formation;
+	}
+
+	public void setFormation(List<Formation> formation) {
+		this.formation = formation;
+	}*/
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public List<Test> getTest() {
+		return test;
+	}
+
+	public void setTest(List<Test> test) {
+		this.test = test;
+	}
+	
+	
 	
 }
