@@ -62,6 +62,11 @@
          <artifactId>cdi-api</artifactId>
          <scope>provided</scope>
       </dependency>
+      <dependency>
+         <groupId>javax</groupId>
+         <artifactId>javaee-api</artifactId>
+         <version>7.0</version>
+      </dependency>
       
       <!-- Import the JSF API, we use provided scope as the API is included in JBoss WildFly -->
       <dependency>
