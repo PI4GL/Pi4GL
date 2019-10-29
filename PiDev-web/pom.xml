@@ -67,6 +67,11 @@
          <artifactId>javaee-api</artifactId>
          <version>7.0</version>
       </dependency>
+      <dependency>
+    <groupId>org.primefaces</groupId>
+    <artifactId>primefaces</artifactId>
+    <version>7.0</version>
+</dependency>
       
       <!-- Import the JSF API, we use provided scope as the API is included in JBoss WildFly -->
       <dependency>

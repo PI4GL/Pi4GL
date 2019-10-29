@@ -7,8 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.swing.plaf.metal.MetalBorders.Flush3DBorder;
 
 import tn.esprit.PiDev.Remotes.ProjectRemote;
+import tn.esprit.PiDev.entities.DevTeam;
 import tn.esprit.PiDev.entities.Employe;
 import tn.esprit.PiDev.entities.Project;
 
@@ -31,13 +33,15 @@ public class ProjectService implements ProjectRemote{
 
 	@Override
 	public void deleteProjet(int idProject) {
-		em.remove(em.find(Project.class, idProject));
-		
+		em.createQuery("delete From Project e where e.idProject=:id").setParameter("id", idProject).executeUpdate();
+		em.flush();
 	}
 
 	@Override
 	public void addProject(Project p) {
           em.persist(p);
+          em.flush();
+          
 		
 	}
 
@@ -54,6 +58,15 @@ public class ProjectService implements ProjectRemote{
 	public List<Project> getListProjects() {
 		TypedQuery<Project> query = em.createQuery("Select e from Project e", Project.class);
 		List<Project> result = query.getResultList();
+		return result;
+	}
+
+
+	@Override
+	public List<DevTeam> getdevTeam() {
+		
+		TypedQuery<DevTeam> query = em.createQuery("Select d From Employe e , DevTeam d Where e.=", DevTeam.class);
+		List<DevTeam> result = query.getResultList();
 		return result;
 	}
 

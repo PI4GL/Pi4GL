@@ -38,6 +38,10 @@ private int cin ;
 		employeService.ajouterEmploye(new Employe(cin, firstName, lastName, birthDate, address, phoneNb, email, hiringDate, salary, role));
 		
 	}
+	
+	public void deletProject() {
+		
+	}
 	public List<Employe> employes;
 	public List<Employe> getEmployes(){
 		
@@ -145,8 +149,10 @@ private int cin ;
 		this.employes = employes;
 	}
 	
-	
-	
+	public void goToAdd() {
+		
+		return ;
+	}	
 	
 	
 	
