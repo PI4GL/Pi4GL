@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Skill implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -49,6 +49,13 @@ public class Skill implements Serializable {
 		super();
 	}
 	
+	public Skill(String name, String description,  Category category ) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.category = category;
+	}
+	
 	public Skill(long id, String name, String description,  Category category ) {
 		super();
 		this.id = id;
@@ -63,7 +70,7 @@ public class Skill implements Serializable {
 		this.category = category;
 	}
 
-
+	// @OneToMany(mappedBy="skill")
 	public long getId() {
 		return id;
 	}
@@ -89,5 +96,6 @@ public class Skill implements Serializable {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
 	
 }

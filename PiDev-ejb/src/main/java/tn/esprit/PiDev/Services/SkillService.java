@@ -6,6 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import tn.esprit.PiDev.entities.Skill;
@@ -22,25 +23,41 @@ public class SkillService implements SkillServiceRemote  {
 	@PersistenceContext
 	EntityManager em;
 
+	public Skill getSkillById(long skillId) {
+		return em.find(Skill.class, skillId);
+
+	}
+
 	@Override
 	public Skill addSkill(Skill skill) {
-		em.persist(skill);
+		em.persist(em.contains(skill) ? skill : em.merge(skill));
 		return skill;
 
 	}
 
 	@Override
 	public Skill updateSkill(Skill skill) {
-		em.persist(skill);
+		em.persist(em.contains(skill) ? skill : em.merge(skill));
 		return skill;
 	}
 
 	@Override
+	public void updateUserSkill(UserSkill userSkill) {
+		em.persist(em.contains(userSkill) ? userSkill : em.merge(userSkill));
+	}
+
+	@Override
 	public void deleteSkill(Skill skill) {
-		em.remove(skill);
+		em.remove(em.contains(skill) ? skill : em.merge(skill));
 
 	}
 
+	@Override
+	public Skill addCategory(Skill skill, Category category) {
+		skill.setCategory(category);
+		em.persist(skill);
+		return skill;
+	}
 
 	@Override
 	public List<Employe> listUsers(Skill skill) {
@@ -71,31 +88,20 @@ public class SkillService implements SkillServiceRemote  {
 
 	@Override
 	public List<Skill> getSkillsByCategoryId(long categoryId) {
-		List<Skill> skills = em.createQuery("SELECT S FROM " + Skill.class.getName() + " S"
-				+ " WHERE S.category.id = :categoryId", Skill.class)
-				.setParameter("categoryId", categoryId)
-				.getResultList();
-		
+		List<Skill> skills = em
+				.createQuery("SELECT S FROM " + Skill.class.getName() + " S" + " WHERE S.category.id = :categoryId",
+						Skill.class)
+				.setParameter("categoryId", categoryId).getResultList();
+
 		return skills;
-	}
-
-	
-
-	@Override
-	public Skill addCategory(Skill skill, Category category) {
-		skill.setCategory(category);
-		em.persist(skill);
-		return skill;
 	}
 
 	@Override
 	public UserSkill getOrCreateUserSkill(long userId, long skillId) {
 		List<UserSkill> userSkills = em
 				.createQuery("SELECT US FROM " + UserSkill.class.getName() + " US"
-						+ " WHERE US.user.cin = :userId AND US.skill.id = :skillId", UserSkill.class)
-				.setParameter("userId", userId)
-				.setParameter("skillId", skillId)
-				.getResultList();
+						+ " WHERE US.user.id = :userId AND US.skill.id = :skillId", UserSkill.class)
+				.setParameter("userId", userId).setParameter("skillId", skillId).getResultList();
 
 		UserSkill userSkill = null;
 
@@ -126,13 +132,16 @@ public class SkillService implements SkillServiceRemote  {
 		}
 
 		return userSkill;
+
 	}
 
 	@Override
-	public void updateUserSkill(UserSkill userSkill) {
-		em.persist(em.contains(userSkill) ? userSkill : em.merge(userSkill));
-		
+	public Skill getSkillByName(String skillName) {
+		Query query = em.createQuery("SELECT S FROM " + Skill.class.getName() + " S WHERE S.name=:name");
+		query.setParameter("name", skillName);
+		List<Skill> skills = query.getResultList();
+		if (skills == null || skills.size() == 0)
+			return null;
+		return skills.get(0);
 	}
-	
-	
 }
