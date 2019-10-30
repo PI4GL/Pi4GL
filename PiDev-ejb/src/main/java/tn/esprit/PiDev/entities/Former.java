@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +23,8 @@ public class Former implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idFormer;
-	private String specialty;
+	@Enumerated(EnumType.STRING)
+	private Specialty specialty;
 	private String nameFormer;
 	private String lastNameFormer;
 	
@@ -34,16 +37,14 @@ public class Former implements Serializable{
 	}
 
 	
-	
-	public Former(String specialty, String nameFormer, String lastNameFormer) {
+
+	public Former(Specialty specialty, String nameFormer, String lastNameFormer) {
 		super();
 		this.specialty = specialty;
 		this.nameFormer = nameFormer;
 		this.lastNameFormer = lastNameFormer;
 	}
 
-	
-	
 
 
 	public Integer getIdFormer() {
@@ -56,14 +57,18 @@ public class Former implements Serializable{
 	}
 
 
-	public String getSpecialty() {
+	
+
+	public Specialty getSpecialty() {
 		return specialty;
 	}
 
 
-	public void setSpecialty(String specialty) {
+
+	public void setSpecialty(Specialty specialty) {
 		this.specialty = specialty;
 	}
+
 
 
 	public String getNameFormer() {

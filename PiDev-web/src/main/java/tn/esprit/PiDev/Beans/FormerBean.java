@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import tn.esprit.PiDev.Services.FormerService;
 import tn.esprit.PiDev.entities.Former;
+import tn.esprit.PiDev.entities.Specialty;
 
 
 @ManagedBean
@@ -18,7 +19,7 @@ public class FormerBean {
 	//zyede
 	private int idFormer;
 	//---
-	private String specialty;
+	private Specialty specialty;
 	private String nameFormer;
 	private String lastNameFormer;
 	List<Former> listFormer;
@@ -30,8 +31,11 @@ public class FormerBean {
 	public String ajouter() {
 		
 		Former fr = new Former();
-		formerService.addFormer(new Former(specialty,nameFormer,lastNameFormer));
-	
+		fr.setNameFormer(nameFormer);
+		fr.setLastNameFormer(lastNameFormer);
+		fr.setSpecialty(specialty);
+		formerService.addFormer(fr);
+		
 		return "/";
 	}
 
@@ -77,14 +81,19 @@ public class FormerBean {
 		this.formers = formers;
 	}
 
+	
 
-	public String getSpecialty() {
+	public Specialty getSpecialty() {
 		return specialty;
 	}
 
-	public void setSpecialty(String specialty) {
+
+
+	public void setSpecialty(Specialty specialty) {
 		this.specialty = specialty;
 	}
+
+
 
 	public String getNameFormer() {
 		return nameFormer;
