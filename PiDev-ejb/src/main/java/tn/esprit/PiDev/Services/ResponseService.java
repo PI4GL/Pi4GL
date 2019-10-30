@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import tn.esprit.PiDev.entities.*;
-import tn.esprit.interfaces.ResponseServiceRemote;
+import tn.esprit.PiDev.Remotes.*;
 
 @Stateless
 @LocalBean

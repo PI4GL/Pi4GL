@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 
 import tn.esprit.PiDev.entities.Skill;
 import tn.esprit.PiDev.entities.UserSkill;
-import tn.esprit.interfaces.SkillServiceRemote;
+import tn.esprit.PiDev.Remotes.*;
 import tn.esprit.PiDev.entities.Category;
 import tn.esprit.PiDev.entities.Employe;
 import tn.esprit.PiDev.entities.Quiz;

@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import tn.esprit.PiDev.entities.JobSheet;
-import tn.esprit.interfaces.JobSheetRemote;
+import tn.esprit.PiDev.Remotes.JobSheetRemote;
 
 @Stateless
 @LocalBean
