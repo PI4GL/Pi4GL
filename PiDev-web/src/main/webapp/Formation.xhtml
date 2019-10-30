@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Formation</title>
+</head>
+
+<h:body>
+
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="title" />
+			<h:inputText value="#{formationBean.titleFormation}" />
+
+			<h:outputText value="domain" />
+			<h:inputText value="#{formationBean.domaineFormation}" />
+
+			<h:outputText value="dateD" />
+			<h:inputText value="#{formationBean.dateDebut}" />
+
+			<p:outputLabel for="button" value="Button:" />
+			<p:datePicker id="button" value="#{formationBean.dateFin}" showIcon="true" />
+
+			<h:outputText value="dateF" />
+			<h:inputText value="#{formationBean.dateFin}" />
+			
+			<!-- items -->
+			<h:outputText value="Former" />
+			<h:selectOneMenu value="#{formationBean.former}">
+				<f:selectItems value="#{formationBean.listFormer}" var="f"
+					itemValue="#{f}" itemLabel="#{f.nameFormer}" />
+
+			</h:selectOneMenu>
+
+			<h:commandButton id="btn" value="ajouter"
+				action="#{formationBean.ajouter()}" />
+			<h:message for="btn" />
+
+			<h:dataTable value="#{formationBean.formations}" var="fr" border="1">
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="title" />
+					</f:facet>
+					<h:outputText value="#{fr.titleFormation}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="domaine" />
+					</f:facet>
+					<h:outputText value="#{fr.domaineFormation}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="dateD" />
+					</f:facet>
+					<h:outputText value="#{fr.dateDebut}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="dateF" />
+					</f:facet>
+					<h:outputText value="#{fr.dateFin}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Former" />
+					</f:facet>
+					<h:outputText value="#{fr.former}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Action" />
+					</f:facet>
+					<h:commandButton
+						action="#{formationBean.supprimerFomation(idFormation)}"
+						value="supprimer" />
+
+				</h:column>
+
+
+
+
+
+
+			</h:dataTable>
+		</h:panelGrid>
+	</h:form>
+
+
+
+
+</h:body>
+
+
+</html>
