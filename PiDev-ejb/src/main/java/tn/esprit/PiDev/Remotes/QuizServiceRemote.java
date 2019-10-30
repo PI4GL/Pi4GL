@@ -1,6 +1,7 @@
 package tn.esprit.PiDev.Remotes;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Remote;
 
@@ -17,4 +18,5 @@ public interface QuizServiceRemote {
 	public UserQuiz getOrCreateUserQuiz(long userId, long quizId);
 	public Quiz getQuizOfSkillWithLevel(long skillId, int quizLevel);
 	void updateUserQuiz(UserQuiz userQuiz);
+	public Map<QuizQuestion, List<UserQuizResponse>> getUserQuizQuestionResponseMap(long userId, long quizId);
 }

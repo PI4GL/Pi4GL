@@ -37,7 +37,7 @@ public class QuestionResponse implements Serializable {
 		this.question = question;
 	}
 
-	@OneToMany(mappedBy="response")
+	// @OneToMany(mappedBy="response")
 	public long getId() {
 		return id;
 	}
@@ -46,11 +46,11 @@ public class QuestionResponse implements Serializable {
 		this.id = id;
 	}
 
-	public boolean isCorrect() {
+	public boolean getIsCorrect() {
 		return isCorrect;
 	}
 
-	public void setCorrect(boolean isCorrect) {
+	public void setIsCorrect(boolean isCorrect) {
 		this.isCorrect = isCorrect;
 	}
 

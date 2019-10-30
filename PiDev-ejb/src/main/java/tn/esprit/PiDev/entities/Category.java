@@ -22,7 +22,13 @@ public class Category implements Serializable {
 	@OneToMany(mappedBy="category")
 	private List<Skill> skills;
 	
+	
 	public Category() {}
+	public Category(String name,String description)
+	{
+		this.name = name;
+		this.description = description;
+	}
 	public Category(long id, String name, String description, List<Skill> skills) {
 		super();
 		this.id = id;
@@ -55,5 +61,6 @@ public class Category implements Serializable {
 		this.skills = skills;
 	}
 		
+	
 	
 }

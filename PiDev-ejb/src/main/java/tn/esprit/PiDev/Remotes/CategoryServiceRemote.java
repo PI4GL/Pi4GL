@@ -17,4 +17,6 @@ public interface CategoryServiceRemote {
 	public List<Skill> listSkills(Category category);
 	public List<Category> ListAllCategories();
 	public Category getCategoryById(long categoryId);
+	Category getCategoryByName(String categoryName);
+	List<Skill> getAllSkills();
 }
