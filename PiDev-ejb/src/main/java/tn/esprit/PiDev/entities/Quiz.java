@@ -34,7 +34,7 @@ public class Quiz implements Serializable {
 	@Column(name = "required_min_level", columnDefinition = "int default 1")
 	private int requiredMinLevel;
 
-	@OneToMany(mappedBy = "quiz")
+	
 	public long getId() {
 		return id;
 	}
