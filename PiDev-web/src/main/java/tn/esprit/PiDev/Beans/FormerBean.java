@@ -11,7 +11,6 @@ import tn.esprit.PiDev.Services.FormerService;
 import tn.esprit.PiDev.entities.Former;
 import tn.esprit.PiDev.entities.Specialty;
 
-
 @ManagedBean
 @SessionScoped
 public class FormerBean {
@@ -24,6 +23,9 @@ public class FormerBean {
 	private String lastNameFormer;
 	List<Former> listFormer;
 	private Former former;
+	
+	//ZYEDE
+	public int idFormerUpdated;
 	
 	@EJB
 	FormerService formerService;
@@ -145,14 +147,44 @@ public class FormerBean {
 	}
 	
 	
-	public void recupererFormer(Former f) {
+	/*public void recupererFormer(Former f) {
 		initialisation();
 
 		nameFormer = f.getNameFormer();
 		lastNameFormer=f.getLastNameFormer();
-		specialty=f.getSpecialty();
-		this.setIdFormer(f.getIdFormer());
+		
+		//specialty=f.getSpecialty();
+		//this.getIdFormerUpdated(f.getIdFormer());
+	
+	}*/
+
+
+
+	public int getIdFormerUpdated() {
+		return idFormerUpdated;
 	}
 
+
+
+	public void setIdFormerUpdated(int idFormerUpdated) {
+		this.idFormerUpdated = idFormerUpdated;
+	}
+
+	
+	public void updateFormer() {
+
+		Former ff = new Former();
+		
+		ff.setIdFormer(this.getIdFormerUpdated());
+		ff.setNameFormer(nameFormer);
+		ff.setLastNameFormer(lastNameFormer);
+		ff.setSpecialty(specialty);
+		
+		formerService.updateFormer(ff);
+	}
 	//zyede
+	
+	
+	
+	
 }

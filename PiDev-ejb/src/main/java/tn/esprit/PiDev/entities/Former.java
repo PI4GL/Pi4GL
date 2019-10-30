@@ -28,6 +28,8 @@ public class Former implements Serializable{
 	private String nameFormer;
 	private String lastNameFormer;
 	
+
+	
 	@OneToMany(mappedBy="former", cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
 	private List<Formation> formation = new ArrayList<Formation>();
 	

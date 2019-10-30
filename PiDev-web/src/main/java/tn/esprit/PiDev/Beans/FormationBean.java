@@ -12,8 +12,11 @@ import javax.faces.bean.SessionScoped;
 
 import tn.esprit.PiDev.Services.FormationService;
 import tn.esprit.PiDev.Services.FormerService;
+import tn.esprit.PiDev.entities.Avis;
 import tn.esprit.PiDev.entities.Formation;
 import tn.esprit.PiDev.entities.Former;
+import tn.esprit.PiDev.entities.Specialty;
+import tn.esprit.PiDev.entities.Test;
 
 
 @ManagedBean
@@ -25,11 +28,13 @@ public class FormationBean {
 	private Date dateDebut;
 	private Date dateFin;
 	List<Formation> listFormation;
-	//private SimpleDateFormat dateDebut;
 	private Formation formation;
 	List<Former> listFormer;
 	//@ManagedProperty("#{Formation}")
 	private Former former;
+	
+	private Avis aviss;
+	private Test testt;
 	
 	@EJB
 	FormationService formationService;
@@ -174,6 +179,42 @@ public class FormationBean {
 
 	public void setFormation(Formation formation) {
 		this.formation = formation;
+	}
+
+
+
+	public Avis getAviss() {
+		return aviss;
+	}
+
+
+
+	public void setAviss(Avis aviss) {
+		this.aviss = aviss;
+	}
+
+
+
+	public Test getTestt() {
+		return testt;
+	}
+
+
+
+	public void setTestt(Test testt) {
+		this.testt = testt;
+	}
+
+
+
+	public FormerService getFormerService() {
+		return formerService;
+	}
+
+
+
+	public void setFormerService(FormerService formerService) {
+		this.formerService = formerService;
 	}
 	
 	//zyede

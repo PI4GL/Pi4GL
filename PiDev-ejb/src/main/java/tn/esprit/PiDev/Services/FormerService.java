@@ -34,6 +34,14 @@ public class FormerService implements FormerInterface{
 	public void updateFormer(Former former) {
 		em.merge(former);
 	}
+	
+	@Override
+	public void updateFormer2(Former former) { 
+		Former fff= em.find(Former.class, former.getIdFormer());
+		fff.setNameFormer(former.getNameFormer());
+		fff.setLastNameFormer(former.getLastNameFormer());
+		fff.setSpecialty(former.getSpecialty());
+	}
 
 	@Override
 	public List<Former> getAllFormer() {

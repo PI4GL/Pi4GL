@@ -29,6 +29,10 @@ public class Formation implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	
+	
+	private Avis aviss;
+
+	
 	@OneToMany(mappedBy="formation")
 	private List<Test> test;
 	
@@ -153,6 +157,19 @@ public class Formation implements Serializable{
 	public void setAvis(List<Avis> avis) {
 		this.avis = avis;
 	}
+
+
+
+	public Avis getAviss() {
+		return aviss;
+	}
+
+
+
+	public void setAviss(Avis aviss) {
+		this.aviss = aviss;
+	}
+
 	
 		
 	

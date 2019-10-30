@@ -25,7 +25,7 @@
 						<!-- Form controls -->
 						<div class="card">
 							<!-- Card header -->
-							<div class="card-header">
+							<div class="card-header" >
 								<h3 class="mb-0">Former</h3>
 							</div>
 							<!-- Card body -->
@@ -59,7 +59,7 @@
 
 									<div class="col-lg-2">
 										<label></label>
-										<h:commandButton id="btn" value="ajouter"
+										<h:commandButton id="btn" value="ADD"
 											action="#{formerBean.ajouter()}" styleClass="form-control" />
 										<h:message for="btn" />
 									</div>
@@ -110,7 +110,7 @@
 
 												<h:commandButton
 													action="#{formerBean.supprimerFormer(f.idFormer)}"
-													value="supprimer" styleClass="form-control" />
+													value="DELETE" styleClass="form-control" />
 
 
 											</h:column>
@@ -121,8 +121,8 @@
 												</f:facet>
 
 												<h:commandButton
-													action="#{formerBean.supprimerFormer(f.idFormer)}"
-													value="supprimer" styleClass="form-control" />
+													action="#{formerBean.mettreAjourFormer()}"
+													value="UPDATE" styleClass="form-control" />
 
 
 											</h:column>
