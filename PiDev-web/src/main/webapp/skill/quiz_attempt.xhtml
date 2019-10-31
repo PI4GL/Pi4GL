@@ -5,7 +5,7 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough" lang="fr"
 	xmlns:c="http://java.sun.com/jstl/core"
-	template="/xhtml/template.xhtml">
+	template="/template.xhtml">
 
 	<ui:param name="quiz_selection" value="index" />
 
@@ -26,21 +26,21 @@
 
 			<div class="row justify-content-center">
 				<br></br>
-				<div class="col-md-12">
-					<h:form class=" border border-light p-5"
-						id="category-selection-form">
-						<div class="container-fluid bg-Dinfo">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
+				<div class="col-10">
+					<h:form class="form"
+						id="inlineFormCustomSelect">
+						<div >
+							<div >
+								<div >
+									<div class="header">
 										<h3>
 											<span class="label label-warning" id="qid">#{quizBean.userQuiz.currentQuestionIndex
 												+ 1}</span> #{quizBean.currentQuizQuestion.content}
 										</h3>
 									</div>
-									<div class="modal-body">
-										<div class="col-xs-3 col-xs-offset-5">
-											<div id="loadbar" style="display: none;">
+									<div >
+										<div >
+											<div >
 												<div class="blockG" id="rotateG_01"></div>
 												<div class="blockG" id="rotateG_02"></div>
 												<div class="blockG" id="rotateG_03"></div>
@@ -68,19 +68,19 @@
 												<h:outputLabel value="#{boxElement.val}" for="a" />
 											</ui:repeat>
 
-											<h:commandButton class="btn btn-info btn-block my-4"
+											<h:commandButton 
 												action="#{quizBean.previousQuestion}" type="submit"
 												value="Previous question" id="prev-q-btn"
 												disabled="#{!quizBean.hasPreviousQuestion}" />
 
 											<c:choose>
 												<c:when test="#{quizBean.hasNextQuestion}">
-													<h:commandButton class="btn btn-info btn-block my-4"
+													<h:commandButton class="btn btn-success waves-effect waves-light mr-2"
 														action="#{quizBean.nextQuestion}" type="submit"
 														value="Next question" id="next-q-btn" />
 												</c:when>
 												<c:otherwise>
-													<h:commandButton class="btn btn-info btn-block my-4"
+													<h:commandButton class="btn btn-inverse waves-effect waves-light"
 														action="#{quizBean.showQuizResult}" type="submit"
 														value="Finish!" id="show-results-btn" />
 												</c:otherwise>
@@ -90,7 +90,7 @@
 
 
 									</div>
-									<div class="modal-footer text-muted">
+									<div class="footer">
 										<span id="answer"></span>
 									</div>
 								</div>
