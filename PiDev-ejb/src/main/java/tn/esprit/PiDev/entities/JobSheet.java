@@ -18,13 +18,13 @@ public class JobSheet {
 	private float basicSalary;
 	
 	@OneToMany
-	private List<Skill> skills=new ArrayList<Skill>();
+	private List<Skill> Skills=new ArrayList<Skill>();
 	private Integer requiredExp;
 	
 	@Override
 	public String toString() {
 		return "JobSheet [Id=" + Id + ", name=" + name + ", description=" + description + ", basicSalary=" + basicSalary
-				+ ", skills=" + skills + ", requiredExp=" + requiredExp +  "]";
+				+ ", skills=" + Skills + ", requiredExp=" + requiredExp +  "]";
 	}
 	@Override
 	public int hashCode() {
@@ -36,7 +36,7 @@ public class JobSheet {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((requiredExp == null) ? 0 : requiredExp.hashCode());
-		result = prime * result + ((skills == null) ? 0 : skills.hashCode());
+		result = prime * result + ((Skills == null) ? 0 : Skills.hashCode());
 		return result;
 	}
 	@Override
@@ -68,20 +68,20 @@ public class JobSheet {
 				return false;
 		} else if (!requiredExp.equals(other.requiredExp))
 			return false;
-		if (skills == null) {
-			if (other.skills != null)
+		if (Skills == null) {
+			if (other.Skills != null)
 				return false;
-		} else if (!skills.equals(other.skills))
+		} else if (!Skills.equals(other.Skills))
 			return false;
 		return true;
 	}
-	public JobSheet(int id, String name, String description, float basicSalary, List<Skill> skills, Integer requiredExp) {
+	public JobSheet(int id, String name, String description, float basicSalary, List<Skill> _Skills, Integer requiredExp) {
 		super();
 		Id = id;
 		this.name = name;
 		this.description = description;
 		this.basicSalary = basicSalary;
-		this.skills = skills;
+		this.Skills = Skills;
 		this.requiredExp = requiredExp;
 		
 	}
@@ -110,10 +110,10 @@ public class JobSheet {
 		this.basicSalary = basicSalary;
 	}
 	public List<Skill> getSkills() {
-		return skills;
+		return Skills;
 	}
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
+	public void setSkills(List<Skill> _Skills) {
+		this.Skills = _Skills;
 	}
 	public Integer getRequiredExp() {
 		return requiredExp;

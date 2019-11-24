@@ -30,7 +30,7 @@ public class Employe implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cin ;
+	protected int cin ;
 	
 	private String firstName;
 	private String lastName;
@@ -184,6 +184,11 @@ public class Employe implements Serializable {
 	public void setFormation(List<Formation> formation) {
 		this.formation = formation;
 	}*/
+
+
+	public Employe(int cin2) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

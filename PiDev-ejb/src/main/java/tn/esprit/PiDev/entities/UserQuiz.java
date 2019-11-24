@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import tn.esprit.PiDev.entities.Employe;
-
+/*
 @Entity
 public class UserQuiz implements Serializable {
 
@@ -93,3 +93,4 @@ public class UserQuiz implements Serializable {
 		this.currentQuestionIndex = currentQuestionIndex;
 	}
 }
+*/

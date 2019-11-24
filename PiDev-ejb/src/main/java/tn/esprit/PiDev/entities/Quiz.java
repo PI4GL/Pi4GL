@@ -29,7 +29,7 @@ public class Quiz implements Serializable {
 	private String description;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Skill skill;
+	private _Skill _Skill;
 
 	@OneToMany(mappedBy = "quiz")
 	private List<QuizQuestion> questions;
@@ -65,12 +65,12 @@ public class Quiz implements Serializable {
 		this.description = description;
 	}
 
-	public Skill getSkill() {
-		return skill;
+	public _Skill getSkill() {
+		return _Skill;
 	}
 
-	public void setSkill(Skill skill) {
-		this.skill = skill;
+	public void setSkill(_Skill _Skill) {
+		this._Skill = _Skill;
 	}
 
 	public List<QuizQuestion> getQuestions() {

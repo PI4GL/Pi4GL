@@ -18,31 +18,31 @@ public class UserSkill implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long id;/*
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "cin", insertable = true, updatable = true)
 	private Employe user;
 	@ManyToOne
 	@JoinColumn(name = "skill_id", referencedColumnName = "id", insertable = true, updatable = true)
-	private Skill skill;
+	private _Skill _Skill;
 	private int level;
 
 	public UserSkill() {
 
 	}
 
-	public UserSkill(int id, Employe user, Skill skill, int level) {
+	public UserSkill(int id, Employe user, _Skill _Skill, int level) {
 		super();
 		this.id = id;
 		this.user = user;
-		this.skill = skill;
+		this._Skill = _Skill;
 		this.level = level;
 	}
 
-	public UserSkill(Employe user, Skill skill, int level) {
+	public UserSkill(Employe user, _Skill _Skill, int level) {
 		super();
 		this.user = user;
-		this.skill = skill;
+		this._Skill = _Skill;
 		this.level = level;
 	}
 
@@ -62,12 +62,12 @@ public class UserSkill implements Serializable {
 		this.user = user;
 	}
 
-	public Skill getSkill() {
-		return skill;
+	public _Skill getSkill() {
+		return _Skill;
 	}
 
-	public void setSkill(Skill skill) {
-		this.skill = skill;
+	public void setSkill(_Skill _Skill) {
+		this._Skill = _Skill;
 	}
 
 	public int getLevel() {
@@ -77,5 +77,5 @@ public class UserSkill implements Serializable {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-
+*/
 }

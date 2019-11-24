@@ -17,8 +17,8 @@ public class Test implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	
 	private Integer idTest;
 	@Enumerated(EnumType.STRING)
 	private Score score ;

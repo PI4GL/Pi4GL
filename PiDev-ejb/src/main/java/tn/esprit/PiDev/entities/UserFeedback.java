@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import tn.esprit.PiDev.entities.Employe;
-
+/*
 @Entity
 public class UserFeedback implements Serializable {
 	@Id
@@ -60,3 +60,4 @@ public class UserFeedback implements Serializable {
 	}
 
 }
+*/

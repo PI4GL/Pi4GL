@@ -20,7 +20,7 @@ public class Category implements Serializable {
 	private String name;
 	private String description;
 	@OneToMany(mappedBy="category")
-	private List<Skill> skills;
+	private List<_Skill> _Skills;
 	
 	
 	public Category() {}
@@ -29,12 +29,12 @@ public class Category implements Serializable {
 		this.name = name;
 		this.description = description;
 	}
-	public Category(long id, String name, String description, List<Skill> skills) {
+	public Category(long id, String name, String description, List<_Skill> _Skills) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.skills = skills;
+		this._Skills = _Skills;
 	}
 	public long getId() {
 		return id;
@@ -54,11 +54,11 @@ public class Category implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<Skill> getSkills() {
-		return skills;
+	public List<_Skill> getSkills() {
+		return _Skills;
 	}
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
+	public void setSkills(List<_Skill> _Skills) {
+		this._Skills = _Skills;
 	}
 		
 	

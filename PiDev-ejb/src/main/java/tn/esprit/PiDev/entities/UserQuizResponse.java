@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import tn.esprit.PiDev.entities.Employe;
-
+/*
 @Entity
 public class UserQuizResponse implements Serializable {
 
@@ -74,3 +74,4 @@ public class UserQuizResponse implements Serializable {
 	
 	
 }
+*/

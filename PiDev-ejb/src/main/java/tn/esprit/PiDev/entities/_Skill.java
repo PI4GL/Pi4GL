@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Skill implements Serializable {
+public class _Skill implements Serializable {
 
 private static final long serialVersionUID = 1L;
 	
@@ -23,7 +23,7 @@ private static final long serialVersionUID = 1L;
 	private String description;
 	@ManyToOne(cascade= {CascadeType.PERSIST})
 	private Category category;
-	@OneToMany(mappedBy="skill")
+	@OneToMany(mappedBy="_Skill")
 	private List<Quiz> quizzes;
 	
 	
@@ -35,7 +35,7 @@ private static final long serialVersionUID = 1L;
 		this.quizzes = quizzes;
 	}
 
-	public Skill(long id, String name, String description,  Category category, List<Quiz> quizzes) {
+	public _Skill(long id, String name, String description,  Category category, List<Quiz> quizzes) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -45,18 +45,18 @@ private static final long serialVersionUID = 1L;
 	}
 	
 
-	public Skill() {
+	public _Skill() {
 		super();
 	}
 	
-	public Skill(String name, String description,  Category category ) {
+	public _Skill(String name, String description,  Category category ) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.category = category;
 	}
 	
-	public Skill(long id, String name, String description,  Category category ) {
+	public _Skill(long id, String name, String description,  Category category ) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -64,7 +64,7 @@ private static final long serialVersionUID = 1L;
 		this.category = category;
 	}
 
-	public Skill(String name, Category category, String description) {
+	public _Skill(String name, Category category, String description) {
 		this.name = name;
 		this.description = description;
 		this.category = category;
