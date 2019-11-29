@@ -32,6 +32,9 @@
 							<div class="card-body">
 								<h:form>
 
+									
+									
+
 									<div>
 										<label class="form-control-label"
 											for="exampleFormControlInput1">Title</label>
@@ -50,42 +53,45 @@
 
 									<label class="form-control-label"
 										for="exampleFormControlInput1">Date Start</label>
-									<input class="form-control" type="date"
-										value="#{formationBean.dateDebut}"
-										id="example-datetime-local-input" />
+									<input class="form-control" type="date" id="db"
+										value="#{formationBean.dateDebut1}" />
 									<label class="form-control-label"
 										for="exampleFormControlInput1">End Start</label>
-									<input class="form-control" type="date"
-										value="#{formationBean.dateFin}"
-										id="example-datetime-local-input" />
+									<input class="form-control" type="date" id="df"
+										value="#{formationBean.dateFin1}" />
 
-
-									<label class="form-control-label"
-										for="exampleFormControlSelect1">Avis</label>
-									<h:selectOneMenu value="#{formationBean.aviss}"
-										styleClass="form-control">
-										<f:selectItems value="#{avisBean.avis}" />
-
-									</h:selectOneMenu>
 
 									<label class="form-control-label"
 										for="exampleFormControlSelect1">Formers</label>
 									<h:selectOneMenu value="#{formationBean.former}"
 										styleClass="form-control">
 										<f:selectItems value="#{formationBean.listFormer}" var="f"
-											itemValue="#{f}" itemLabel="#{f.nameFormer}" />
+											itemValue="#{f.idFormer}" itemLabel="#{f.nameFormer}" />
 
 									</h:selectOneMenu>
 
 									<label></label>
 
-									<h:commandButton id="btn" value="ajouter"
-										styleClass="form-control" action="#{formationBean.ajouter()}" />
-									<h:message for="btn" />
+									<h:inputText value="#{formationBean.dateDebut}"
+										styleClass="dtb" style="opacity : 0"></h:inputText>
+									<h:inputText value="#{formationBean.dateFin}" styleClass="dtf"
+										style="opacity : 0"></h:inputText>
 
 									<label></label>
+									<div class="col-lg-2">
+										<h:commandButton value="ADD"
+											styleClass="btn btn-primary btn-md"
+											action="#{formationBean.ajouter()}" />
+									
+										<h:commandButton value="Update"
+											action="#{formationBean.updateFormation()}"
+											styleClass="btn btn-success" />
 
+									</div>
+									<label></label>
 
+								</h:form>
+								<h:form>
 
 
 									<div class="card-header border-0">
@@ -137,11 +143,23 @@
 
 											<h:column>
 												<f:facet name="header">
-													<h:outputText value="Action" />
+													<h:outputText value="Action(1)" />
 												</f:facet>
 												<h:commandButton
-													action="#{formationBean.supprimerFomation(idFormation)}"
-													value="supprimer" styleClass="form-control" />
+													action="#{formationBean.supprimerFomation(fr.idFormation)}"
+													value="DELETE" styleClass="btn btn-danger" />
+
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Action (2)" />
+												</f:facet>
+
+												<h:commandButton
+													action="#{formationBean.mettreAjourFormation(fr)}"
+													value="UPDATE" styleClass="btn btn-warning" />
+
 
 											</h:column>
 
@@ -161,34 +179,43 @@
 			</div>
 			<!-- Footer -->
 			<footer class="footer pt-0">
-			<div class="row align-items-center justify-content-lg-between">
-				<div class="col-lg-6">
-					<div class="copyright text-center text-lg-left text-muted">
-						© 2019 <a href="https://www.creative-tim.com"
-							class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<ul
-						class="nav nav-footer justify-content-center justify-content-lg-end">
-						<li class="nav-item"><a href="https://www.creative-tim.com"
-							class="nav-link" target="_blank">Creative Tim</a></li>
-						<li class="nav-item"><a
-							href="https://www.creative-tim.com/presentation" class="nav-link"
-							target="_blank">About Us</a></li>
-						<li class="nav-item"><a href="http://blog.creative-tim.com"
-							class="nav-link" target="_blank">Blog</a></li>
-						<li class="nav-item"><a
-							href="https://www.creative-tim.com/license" class="nav-link"
-							target="_blank">License</a></li>
-					</ul>
-				</div>
-			</div>
+
 			</footer>
 		</div>
 
 
 	</ui:define>
+
+
+	<ui:define name="js">
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<h:outputScript>
+		
+		$(function(){
+
+			  $("#db").change(
+					function(){
+					
+						$(".dtb").val($("#db").val());
+						
+					}	  
+			  );
+			  
+			   $("#df").change(
+					function(){
+						$(".dtf").val($("#df").val());
+							
+					}	  
+			  );
+
+			});
+		
+		</h:outputScript>
+	</ui:define>
+
+
 
 </ui:composition>
 </html>

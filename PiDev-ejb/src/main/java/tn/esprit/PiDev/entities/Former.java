@@ -14,7 +14,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Former implements Serializable{
 	
@@ -29,10 +31,10 @@ public class Former implements Serializable{
 	private String lastNameFormer;
 	
 
-	
+	/*
 	@OneToMany(mappedBy="former", cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
 	private List<Formation> formation = new ArrayList<Formation>();
-	
+	*/
 	
 	public Former() {
 		
@@ -97,7 +99,7 @@ public class Former implements Serializable{
 		return serialVersionUID;
 	}
 
-
+/*
 	public List<Formation> getFormation() {
 		return formation;
 	}
@@ -107,7 +109,7 @@ public class Former implements Serializable{
 		this.formation = formation;
 	}
 
-
+*/
 
 	@Override
 	public String toString() {

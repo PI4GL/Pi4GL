@@ -56,13 +56,17 @@
 
 										</h:selectOneMenu>
 									</div>
-
+									<label></label>
 									<div class="col-lg-2">
 										<label></label>
-										<h:commandButton id="btn" value="ADD"
-											action="#{formerBean.ajouter()}" styleClass="form-control" />
-										<h:message for="btn" />
+										<h:commandButton  value="ADD" 
+											action="#{formerBean.ajouter()}" styleClass="btn btn-primary btn-md"/>
+										
+										<h:commandButton  value="Update" 
+											action="#{formerBean.updateFormer()}" styleClass="btn btn-success"/>
+										
 									</div>
+									
 									<label></label>
 
 
@@ -110,7 +114,7 @@
 
 												<h:commandButton
 													action="#{formerBean.supprimerFormer(f.idFormer)}"
-													value="DELETE" styleClass="form-control" />
+													value="DELETE" styleClass="btn btn-danger" />
 
 
 											</h:column>
@@ -121,8 +125,8 @@
 												</f:facet>
 
 												<h:commandButton
-													action="#{formerBean.mettreAjourFormer()}"
-													value="UPDATE" styleClass="form-control" />
+													action="#{formerBean.mettreAjourFormer(f)}"
+													value="UPDATE" styleClass="btn btn-warning" />
 
 
 											</h:column>

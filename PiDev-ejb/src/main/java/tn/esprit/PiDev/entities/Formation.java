@@ -13,7 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Formation implements Serializable{
 	
@@ -28,18 +30,13 @@ public class Formation implements Serializable{
 	private Date dateDebut;
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
-	
-	
-	private Avis aviss;
 
-	
+	/*
 	@OneToMany(mappedBy="formation")
 	private List<Test> test;
 	
 	@OneToMany(mappedBy="formation")
-	private List<Avis> avis;
-	/*@ManyToMany
-	private List<Employe> employe;*/
+	private List<Avis> avis;*/
 	
 	@ManyToOne
 	private Former former;
@@ -58,17 +55,16 @@ public class Formation implements Serializable{
 		this.dateFin = dateFin;
 	}
 
-
 	
 
-	public Formation(String titleFormation, String domaineFormation, Date dateDebut, Date dateFin, List<Test> test,List<Avis> avis, Former former) {
+
+	public Formation(String titleFormation, String domaineFormation, Date dateDebut, Date dateFin,
+			Former former) {
 		super();
 		this.titleFormation = titleFormation;
 		this.domaineFormation = domaineFormation;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.test = test;
-		this.avis = avis;
 		this.former = former;
 	}
 
@@ -138,7 +134,7 @@ public class Formation implements Serializable{
 		this.former = former;
 	}
 
-
+/*
 	public List<Test> getTest() {
 		return test;
 	}
@@ -158,18 +154,7 @@ public class Formation implements Serializable{
 		this.avis = avis;
 	}
 
-
-
-	public Avis getAviss() {
-		return aviss;
-	}
-
-
-
-	public void setAviss(Avis aviss) {
-		this.aviss = aviss;
-	}
-
+*/
 	
 		
 	

@@ -1,6 +1,7 @@
 package tn.esprit.PiDev.Beans;
 
 
+import java.text.Normalizer.Form;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -60,7 +61,11 @@ public class FormerBean {
 	
 	public void mettreAjourFormer(Former former)
 	{
-		formerService.updateFormer(new Former(specialty, nameFormer, lastNameFormer));
+		//formerService.updateFormer(new Former(specialty, nameFormer, lastNameFormer));
+		idFormer=former.getIdFormer();
+		nameFormer=former.getNameFormer();
+		lastNameFormer=former.getLastNameFormer();
+		specialty=former.getSpecialty();
 	}
 	
 	public FormerBean() {
@@ -171,16 +176,15 @@ public class FormerBean {
 	}
 
 	
-	public void updateFormer() {
-
-		Former ff = new Former();
-		
-		ff.setIdFormer(this.getIdFormerUpdated());
+	public String updateFormer() {
+		Former ff=formerService.getFormerById(idFormer);	
 		ff.setNameFormer(nameFormer);
 		ff.setLastNameFormer(lastNameFormer);
 		ff.setSpecialty(specialty);
 		
+		
 		formerService.updateFormer(ff);
+		return"Former?faces-redirect=true"; 
 	}
 	//zyede
 	
