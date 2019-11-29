@@ -20,7 +20,7 @@ import tn.esprit.PiDev.entities.Project;
 
 public class ProjectService implements ProjectRemote{
 	
-	@PersistenceContext(unitName = "PiDev-ejb")
+	@PersistenceContext
 	EntityManager em;
 
 	

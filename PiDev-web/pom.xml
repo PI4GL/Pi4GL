@@ -72,6 +72,12 @@
     <artifactId>primefaces</artifactId>
     <version>7.0</version>
 </dependency>
+
+	<dependency>
+    	<groupId>org.richfaces</groupId>
+    	<artifactId>richfaces</artifactId>
+    	<version>4.5.1.Final</version>
+	</dependency>
       
       <!-- Import the JSF API, we use provided scope as the API is included in JBoss WildFly -->
       <dependency>

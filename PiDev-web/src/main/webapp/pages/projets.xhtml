@@ -9,7 +9,12 @@ xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
-
+  <ui:composition template="/xhtml/template.xhtml">
+      
+      <ui:define name="title">hello</ui:define>
+      
+      <ui:define name="content">
+      
 
 <h:head>
 	Project Management
@@ -55,6 +60,6 @@ xmlns="http://www.w3.org/1999/xhtml"
 <br></br><br></br>
 <h:link outcome="/pages/add" value="Add New Project"/>
 </h:body>
-
+</ui:define></ui:composition>
 
 </html>

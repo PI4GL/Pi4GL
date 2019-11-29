@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/xhtml/templateM.xhtml">
+
+	<ui:define name="title">TimeSheet Employee</ui:define>
+
+	<ui:define name="content">
+	
+	
+
+		<div class="container-fluid mt--6">
+			<div class="card mb-3">
+				<!-- Card header -->
+
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card-wrapper">
+						<!-- Form controls -->
+						<div class="card">
+							<!-- Card header -->
+							<div class="card-header">
+								<h3 class="mb-0">Employee TimeSheet</h3>
+							</div>
+							<!-- Card body -->
+							<div class="card-body">
+			<!-- Ajout**********************  -->
+			<h:form class="form-horizontal">
+				<br />
+				<br />
+				<br />
+				<br />
+
+
+				<!-- Affichage **********************  -->
+				<!-- Filtre **********************  -->
+
+
+				<!-- clock-in clock-out **********************  -->
+				<div class="card">
+
+
+
+				<div class="table-responsive m-b-40">
+					<h:dataTable value="#{timesheetManager.list}" var="i"
+						class="table table-borderless table-data3">
+
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Employee Name" />
+							</f:facet>
+
+							<h:outputText value="#{i.employee.firstname}" />
+
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Employee LastName" />
+							</f:facet>
+							<h:outputText value="#{i.employee.lastName}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Total Hours" />
+							</f:facet>
+							<h:outputText value="#{i.totalHours}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Salary" />
+							</f:facet>
+							<h:outputText value="#{i.salary}">
+							<f:convertNumber pattern="####.###"/>
+							</h:outputText>
+						</h:column>
+
+
+
+
+
+
+
+					</h:dataTable>
+
+				</div>
+				</div>
+			</h:form>
+
+							</div>
+						</div>
+						<!-- HTML5 inputs -->
+
+					</div>
+				</div>
+
+			</div>
+			<!-- Footer -->
+
+		</div>
+
+
+	</ui:define>
+
+</ui:composition>
+</html> 

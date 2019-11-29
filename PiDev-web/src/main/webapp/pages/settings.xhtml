@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/xhtml/templateM.xhtml">
+
+	<ui:define name="title">TimeSheet Employee</ui:define>
+
+	<ui:define name="content">
+<!-- Ajout**********************  -->
+			<h:form class="form-horizontal">
+				<br />
+				<br />
+				<br />
+				<br />
+
+				<div class="card">
+
+					<div class="card-header">
+						<strong>Timesheet</strong> Settings
+					</div>
+
+					<div class="card-body card-block">
+
+
+						<div class="row form-group">
+
+							<div class="col col-md-3">
+								<h:outputText value="Regular rate" class=" form-control-label" />
+							</div>
+
+							<div class="col-12 col-md-9">
+								<h:inputText value="#{settingsBean.settings.regularRate}"
+									class="form-control" />
+
+
+							</div>
+						</div>
+
+
+						<div class="row form-group">
+
+							<div class="col col-md-3">
+								<h:outputText value="Overtime rate" class=" form-control-label" />
+							</div>
+
+							<div class="col-12 col-md-9">
+								<h:inputText value="#{settingsBean.settings.overtimeRate}"
+									class="form-control" />
+
+
+							</div>
+						</div>
+
+						<div class="row form-group">
+
+							<div class="col col-md-3">
+								<h:outputText value="Double overtime rate"
+									class=" form-control-label" />
+							</div>
+
+							<div class="col-12 col-md-9">
+								<h:inputText value="#{settingsBean.settings.doubleOvertimeRate}"
+									class="form-control" />
+
+
+							</div>
+						</div>
+
+
+					</div>
+
+					<div class="card-footer">
+						<h:commandButton action="#{settingsBean.addSettings()}"
+							value="Save settings" class="btn btn-primary btn-sm" />
+
+
+						<button type="reset" class="btn btn-danger btn-sm">
+							<i class="fa fa-ban" /> Reset
+						</button>
+					</div>
+				</div>
+
+
+
+			</h:form>
+
+
+		
+
+
+	</ui:define>
+
+</ui:composition>
+</html> 
