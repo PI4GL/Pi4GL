@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import tn.esprit.PiDev.Services.FormationService;
 import tn.esprit.PiDev.Services.TestService;
@@ -198,6 +199,17 @@ public class GestionTest {
 
 		testService.removeReponse(r);
 		return Response.status(Response.Status.OK).build();
+	}
+	
+	@DELETE
+	@Path("del/{id}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response deleteReponse(@PathParam("id") int id) {
+		 
+		testService.deleteReponse(id);
+			return Response.status(Status.OK).entity("Projet Deleted").build();
+			
+
 	}
 
 }
