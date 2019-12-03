@@ -31,4 +31,7 @@ public interface TestInterface {
 	List<Reponse> AllReponse();
 	Reponse getReponseById(int idReponse);
 	void removeReponse(Reponse reponse);
+	
+	List<Question> getAllQ(int id);
+	List<Reponse> getAllR(int id);
 }

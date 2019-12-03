@@ -6,6 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import tn.esprit.PiDev.Remotes.TestInterface;
 import tn.esprit.PiDev.entities.Formation;
@@ -117,16 +118,31 @@ public class TestService implements TestInterface{
 
 	@Override
 	public void removeQuestion(Question question) {
-		
+		/*
 		Question quest = em.find(Question.class, question.getIdQues());
-		em.remove(quest);
+		em.remove(quest);*/
+		em.remove(em.contains(question) ? question : em.merge(question));	
 	}
 
 	@Override
 	public void removeReponse(Reponse reponse) {
 		
-		Reponse rsp = em.find(Reponse.class, reponse.getIdRep());
-		em.remove(rsp);
+		/*Reponse rsp = em.find(Reponse.class, reponse.getIdRep());
+		em.remove(rsp);*/
+		em.remove(em.contains(reponse) ? reponse : em.merge(reponse));		}
+
+	@Override
+	public List<Question> getAllQ(int id) {
+		TypedQuery<Question> query = em.createQuery("select q from Question q where q.testt.idTest = :id",Question.class);
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Reponse> getAllR(int id) {
+		TypedQuery<Reponse> query = em.createQuery("select r from Reponse r where r.quest.idQues = :id",Reponse.class);
+		query.setParameter("id", id);
+		return query.getResultList();
 	}
 	
 	

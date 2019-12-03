@@ -100,13 +100,23 @@ public class GestionTest {
 	}
 
 	
-	@POST
+	/*@POST
 	@Path("addtest/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response add(Test t, @PathParam("id") int id)
 	{
 		Formation f = formationService.getFormationById(id);
 		t.setFormation(f);
+		
+		testService.addTest(t);
+		return Response.status(Response.Status.OK).build();
+	}*/
+	@Path("addtest")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response add(Test t)
+	{
+		t.setIdTest(null);
 		
 		testService.addTest(t);
 		return Response.status(Response.Status.OK).build();
@@ -134,11 +144,22 @@ public class GestionTest {
 		testService.addReponse(r);
 		return Response.status(Response.Status.OK).build();		
 	}
-	
+	/*
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateT(Test t)
 	{
+		testService.updateTest(t);
+		return Response.status(Response.Status.OK).build();
+	}*/
+	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateT(Test t, @PathParam("id") int id)
+	{
+		Formation f = formationService.getFormationById(id);
+		t.setFormation(f);
+		
 		testService.updateTest(t);
 		return Response.status(Response.Status.OK).build();
 	}
@@ -162,7 +183,7 @@ public class GestionTest {
 	}
 	
 	@PUT
-	@Path("formationUp/{idtest}/{idformation}")
+	@Path("addFormation/{idtest}/{idformation}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addtestToFormation(@PathParam("idtest") int idtest,@PathParam("idformation") int idformation)
 	{
@@ -202,14 +223,51 @@ public class GestionTest {
 	}
 	
 	@DELETE
-	@Path("del/{id}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Path("delR/{id}")
+
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteReponse(@PathParam("id") int id) {
 		 
 		testService.deleteReponse(id);
-			return Response.status(Status.OK).entity("Projet Deleted").build();
+			return Response.status(Status.OK).build();			
+	}
+	
+	@DELETE
+	@Path("delQ/{id}")
+
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteQuestion(@PathParam("id") int id) {
+		 
+		
+		testService.deleteQuestion(id);
+			return Response.status(Status.OK).build();
 			
 
 	}
+	
+	@DELETE
+	@Path("delT/{id}")
+
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteTest(@PathParam("id") int id) {
+		 
+		Test t = testService.get_Test(id);
+		List<Question> listeQ= testService.getAllQ(id);
+		for(Question q : listeQ)
+		{
+			List<Reponse> listeR = testService.getAllR(q.getIdQues());
+			for (Reponse r : listeR)
+			{
+				testService.removeReponse(r);
+			}
+			testService.removeQuestion(q);
+		}
+		//testService.deleteTest(idT);
+		testService.removeTest(t);
+			return Response.status(Status.OK).build();
+			
+
+	}
+
 
 }
