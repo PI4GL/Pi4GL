@@ -1,4 +1,4 @@
-package tn.esprit.PiDev.Remotes;
+package tn.esprit.PiDev.Services;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.ejb.Remote;
 
 import tn.esprit.PiDev.entities.QuestionResponse;
 import tn.esprit.PiDev.entities.QuizQuestion;
+import tn.esprit.PiDev.entities.UserQuizResponse;
 import tn.esprit.PiDev.entities.UserQuizResponse;
 @Remote
 public interface QuestionServiceRemote {

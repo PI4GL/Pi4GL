@@ -12,7 +12,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import tn.esprit.PiDev.entities.*;
 import tn.esprit.PiDev.Services.*;
-
 @ManagedBean(name = "quizBean", eager = true)
 @SessionScoped
 public class QuizBean {
@@ -81,12 +80,12 @@ public class QuizBean {
 		}
 		selectedSkillId = skills.get(0).getId();
 
-		Employe user = new Employe();
-		user.setCin(1);// lb.getUser();
+		Utilisateur user = new Utilisateur();
+		user.setId(1);// lb.getUser();
 
-		UserSkill userSkill = skillService.getOrCreateUserSkill(user.getCin(), selectedSkillId);
+		UserSkill userSkill = skillService.getOrCreateUserSkill(user.getId(), selectedSkillId);
 		startQuizMsg = "Your current level is: " + userSkill.getLevel();
-
+																			
 		refreshQuiz(abe);
 	}
 
@@ -97,10 +96,10 @@ public class QuizBean {
 		System.out.println("refreshQuiz is called!");
 		System.out.println("canStartQuiz: " + canStartQuiz);
 
-		Employe user = new Employe();
-		user.setCin(1);// lb.getUser();
+		Utilisateur user = new Utilisateur();
+		user.setId(1);// lb.getUser();
 
-		UserSkill userSkill = skillService.getOrCreateUserSkill(user.getCin(), selectedSkillId);
+		UserSkill userSkill = skillService.getOrCreateUserSkill(user.getId(), selectedSkillId);
 		startQuizMsg = "Your current level is: " + userSkill.getLevel();
 
 		if (quiz == null) {
@@ -130,11 +129,11 @@ public class QuizBean {
 		// What quiz to select?
 		long quizId = quiz.getId();
 
-		Employe user = new Employe();
-		user.setCin(1);// lb.getUser();
+		Utilisateur user = new Utilisateur();
+		user.setId(1);// lb.getUser();
 
 		// Check if UserQuiz exists, create one if not, and get it
-		userQuiz = quizService.getOrCreateUserQuiz(user.getCin(), quizId);
+		userQuiz = quizService.getOrCreateUserQuiz(user.getId(), quizId);
 
 		return navTo;
 	}
@@ -189,10 +188,10 @@ public class QuizBean {
 	public String showQuizResult() {
 		System.out.println("SHOWING QUIZ RESULT!");
 
-		Employe user = new Employe();
-		user.setCin(1);// lb.getUser();
+		Utilisateur user = new Utilisateur();
+		user.setId(1);// lb.getUser();
 
-		quizQToUserResponseMap = quizService.getUserQuizQuestionResponseMap(user.getCin(), userQuiz.getQuiz().getId());
+		quizQToUserResponseMap = quizService.getUserQuizQuestionResponseMap(user.getId(), userQuiz.getQuiz().getId());
 
 		if (quizQToUserResponseMap == null)
 			return null;
@@ -225,17 +224,17 @@ public class QuizBean {
 			// Now, depending on the user type, we update skill level...
 			
 			// Meaning an employee
-			
+			if (userQuiz.getUser().isActif() == true) {
 				
-				UserSkill userSkill = skillService.getOrCreateUserSkill(user.getCin(), selectedSkillId);
+				UserSkill userSkill = skillService.getOrCreateUserSkill(user.getId(), selectedSkillId);
 				userSkill.setLevel(Math.max(userSkill.getLevel() + 1, userQuiz.getQuiz().getRequiredMinLevel()));
 				skillService.updateUserSkill(userSkill);
 				
-			 // Else, a candidate
-			
+			} else // Else, a candidate
+			{
 				// Use calendar to schedule an meet-up
 				
-			
+			}
 
 		}
 
@@ -280,12 +279,12 @@ public class QuizBean {
 
 	public void updateUserQuestionResponse(long responseId, boolean toChecked) {
 
-		Employe user = new Employe();
-		user.setCin(1);// lb.getUser();
+		Utilisateur user = new Utilisateur();
+		user.setId(1);// lb.getUser();
 
 		System.out.println("updateUserQuestionResponse called!!!");
 
-		UserQuizResponse userQuizResponse = questionService.getOrCreateUserQuestionResponse(user.getCin(), responseId);
+		UserQuizResponse userQuizResponse = questionService.getOrCreateUserQuestionResponse(user.getId(), responseId);
 
 		if (userQuizResponse == null) {
 			System.out.println("Got non-valid user quiz response with responseId: " + responseId);
@@ -311,15 +310,15 @@ public class QuizBean {
 		if (selectedCategoryId == 0 || selectedSkillId == 0)
 			return null;
 
-		Employe user = new Employe();
-		user.setCin(1);// lb.getUser();
+		Utilisateur user = new Utilisateur();
+		user.setId(1);// lb.getUser();
 
 		// Before knowing the quiz, what's the level of the user with the selected
 		// skill?
-		UserSkill userSkill = skillService.getOrCreateUserSkill(user.getCin(), selectedSkillId);
+		UserSkill userSkill = skillService.getOrCreateUserSkill(user.getId(), selectedSkillId);
 
 		if (userSkill == null) {
-			System.out.println("Check your user's existence for id: " + user.getCin());
+			System.out.println("Check your user's existence for id: " + user.getId());
 			return null;
 		}
 
@@ -390,14 +389,14 @@ public class QuizBean {
 
 		userQuestionResponses = new ArrayList<UserQuizResponse>();
 
-		Employe user = new Employe();
-		user.setCin(1);// lb.getUser();
+		Utilisateur user = new Utilisateur();
+		user.setId(1);// lb.getUser();
 
 		List<QuestionResponse> questionResponses = questionService.listResponses(getCurrentQuizQuestion());
 
 		// Init or check for user-response rows in database
 		for (QuestionResponse questionResponse : questionResponses) {
-			UserQuizResponse uqr = questionService.getOrCreateUserQuestionResponse(user.getCin(),
+			UserQuizResponse uqr = questionService.getOrCreateUserQuestionResponse(user.getId(),
 					questionResponse.getId());
 			userQuestionResponses.add(uqr);
 		}

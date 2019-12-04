@@ -9,25 +9,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import tn.esprit.PiDev.entities.Employe;
-/*
+
+
 @Entity
 public class UserFeedback implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	public UserFeedback() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	@ManyToOne
-	@JoinColumn(name="user_id", referencedColumnName="cin", insertable = false, updatable = false)
-	private Employe user;
+	@JoinColumn(name="user_id", referencedColumnName="id", insertable = false, updatable = false)
+	private Utilisateur user;
 	@ManyToOne
 	@JoinColumn(name="quiz_id", referencedColumnName="id", insertable = false, updatable = false)
 	private Quiz quiz;
 	private String feedback;
-	public UserFeedback(int id, Employe user, Quiz quiz, String feedback) {
+	public UserFeedback()
+	{
+		
+	}
+	public UserFeedback(int id, Utilisateur user, Quiz quiz, String feedback) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -40,10 +40,10 @@ public class UserFeedback implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Employe getUser() {
+	public Utilisateur getUser() {
 		return user;
 	}
-	public void setUser(Employe user) {
+	public void setUser(Utilisateur user) {
 		this.user = user;
 	}
 	public Quiz getQuiz() {
@@ -60,4 +60,3 @@ public class UserFeedback implements Serializable {
 	}
 
 }
-*/

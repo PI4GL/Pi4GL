@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -5,36 +6,39 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough" lang="fr"
 	xmlns:c="http://java.sun.com/jstl/core"
-	template="/template.xhtml">
-	<ui:param name="quiz_selection" value="index" />
-	<ui:define name="title">            
-start by adding a category        
-        </ui:define>
-	<ui:define name="content2">
+	template="/xhtml/template.xhtml">
 
+
+         
+       <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Category Section</title>
+</head>
+        <h:body >
+            
 		<!-- Default form login -->
-		<div class="container-fluid" >
-			<div class="form-group mt-4 row">
+		<div >
+			<div>
 				<br></br>
-				<div class="col-12">
-					<h:form class="form" >
+				<div >
+					<h:form  >
 						<h2>Add a new Category!</h2>
 						<h5>Enter name</h5>
-						<h:inputText class="col-2 col-form-label"
+						<h:inputText>
 							value="#{categoryBean.name}">
 							<f:ajax listener="#{categoryBean.verifyExistance}"
 								render="add-category-btn" />
 						</h:inputText>
 
 						<h5>Description</h5>
-						<h:inputText class="col-2 col-form-label"
+						<h:inputText >
 							value="#{categoryBean.description}">
 						</h:inputText>
 						<br></br>
 						<br></br>
 						<br></br>
 
-						<h:commandButton class=""
+						<h:commandButton
 							action="#{categoryBean.addCategory}" type="submit"
 							value="Add category!" id="add-category-btn"
 							disabled="#{!categoryBean.canAddCategory}" />
@@ -47,5 +51,6 @@ start by adding a category
 				</div>
 			</div>
 		</div>
-	</ui:define>
+		</h:body>
+
 </ui:composition>

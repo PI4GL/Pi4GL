@@ -8,8 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import tn.esprit.PiDev.entities.*;
-import tn.esprit.PiDev.Remotes.*;
+import tn.esprit.PiDev.entities.Utilisateur;
+import tn.esprit.PiDev.entities.QuestionResponse;
+import tn.esprit.PiDev.entities.Quiz;
+import tn.esprit.PiDev.entities.QuizQuestion;
+import tn.esprit.PiDev.entities.Skill;
+import tn.esprit.PiDev.entities.UserQuizResponse;
+import tn.esprit.PiDev.entities.UserSkill;
+import tn.esprit.PiDev.Remotes.QuestionServiceRemote;
 
 @Stateless
 @LocalBean
@@ -42,6 +48,28 @@ public class QuestionService  implements QuestionServiceRemote{
 		return null;
 	} 
 	
+	
+	@Override
+	public QuizQuestion getQuestionById(int questionId)
+	{
+		return em.find(QuizQuestion.class, questionId);
+		
+	}
+	
+	@Override
+	public List<QuestionResponse> listResponsesByQuestionId(int questionId) {
+		TypedQuery<QuestionResponse> query = em.createQuery("SELECT R FROM " + QuestionResponse.class.getName() + " R WHERE R.question.id = :questionId", QuestionResponse.class)
+				.setParameter("questionId", questionId);
+		try {
+			return query.getResultList();
+		}
+
+		catch (Exception e) {
+			System.out.print("error");
+		}
+		return null;
+	} 
+	
 	@Override
 	public UserQuizResponse getOrCreateUserQuestionResponse(long userId, long responseId)
 	{
@@ -58,7 +86,7 @@ public class QuestionService  implements QuestionServiceRemote{
 		if (userQuizResponses == null || userQuizResponses.size() == 0) {
 			// Then create one
 
-			Employe user = em.find(Employe.class, userId);
+			Utilisateur user = em.find(Utilisateur.class, userId);
 
 			if (user == null) {
 				System.out.println("Got a non-valid user id: " + userId + ".");

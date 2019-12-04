@@ -8,10 +8,16 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import tn.esprit.PiDev.entities.*;
-import tn.esprit.PiDev.Remotes.*;
+import tn.esprit.PiDev.entities.Utilisateur;
+import tn.esprit.PiDev.Remotes.QuizServiceRemote;
+import tn.esprit.PiDev.entities.Quiz;
+import tn.esprit.PiDev.entities.QuizQuestion;
+import tn.esprit.PiDev.entities.Skill;
+import tn.esprit.PiDev.entities.UserQuiz;
+import tn.esprit.PiDev.entities.UserQuizResponse;
 
 @Stateless
 @LocalBean
@@ -54,6 +60,21 @@ public class QuizService implements QuizServiceRemote {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<QuizQuestion> listQuestionsByQuizId(long quizId) {
+
+		TypedQuery<QuizQuestion> query = em.createQuery("SELECT Q FROM " + QuizQuestion.class.getName() + " Q WHERE Q.quiz.id = :quizId",
+				QuizQuestion.class).setParameter("quizId", quizId);
+		try {
+			return query.getResultList();
+		}
+
+		catch (Exception e) {
+			System.out.print("error");
+		}
+		return null;
+	}
 
 	@Override
 	public UserQuiz getOrCreateUserQuiz(long userId, long quizId) {
@@ -69,7 +90,7 @@ public class QuizService implements QuizServiceRemote {
 		if (userQuizs == null || userQuizs.size() == 0) {
 			// Then create one
 
-			Employe user = em.find(Employe.class, userId);
+			Utilisateur user = em.find(Utilisateur.class, userId);
 
 			if (user == null) {
 				System.out.println("Got a non-valid user id: " + userId + ".");
@@ -125,10 +146,28 @@ public class QuizService implements QuizServiceRemote {
 	{
 		em.persist(em.contains(userQuiz) ? userQuiz : em.merge(userQuiz));
 	}
-
+	
 	@Override
-	public Map<QuizQuestion, List<UserQuizResponse>> getUserQuizQuestionResponseMap(long userId, long quizId) {
-Map<QuizQuestion, List<UserQuizResponse>> map = new HashMap<QuizQuestion, List<UserQuizResponse>>();
+	public void updateUserQuizQuestionIndex(long userQuizId, int newIndex)
+	{
+		UserQuiz userQuiz = em.find(UserQuiz.class, userQuizId);
+	
+		if(userQuiz == null)
+		{
+			System.out.println("Failed to find a user quiz during question index update.");
+			return;
+		}
+		
+		userQuiz.setCurrentQuestionIndex(newIndex);
+		updateUserQuiz(userQuiz);
+		System.out.println("Success question index update.");
+
+	}
+	
+	@Override
+	public Map<QuizQuestion, List<UserQuizResponse>> getUserQuizQuestionResponseMap(long userId, long quizId)
+	{
+		Map<QuizQuestion, List<UserQuizResponse>> map = new HashMap<QuizQuestion, List<UserQuizResponse>>();
 		
 		// Get all questions relevant to this quiz
 		List<QuizQuestion> quizQuestions = em.createQuery("SELECT QQ FROM " + QuizQuestion.class.getName() + " QQ"
@@ -152,5 +191,4 @@ Map<QuizQuestion, List<UserQuizResponse>> map = new HashMap<QuizQuestion, List<U
 		
 	    return map;
 	}
-	
 }

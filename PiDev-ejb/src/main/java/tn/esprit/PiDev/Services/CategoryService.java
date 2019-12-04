@@ -39,6 +39,19 @@ public class CategoryService implements CategoryServiceRemote {
 
 	}
 
+	@Override
+	public List<Skill> getAllSkills() {
+
+		TypedQuery<Skill> query = em.createQuery("Select s from Skill s", Skill.class);
+		try {
+			return query.getResultList();
+		}
+
+		catch (Exception e) {
+			System.out.print("error");
+		}
+		return null;
+	}
 	
 	
 	@Override
@@ -84,22 +97,6 @@ public class CategoryService implements CategoryServiceRemote {
 		if(categories==null || categories.size()==0)
 			return null;
 		return categories.get(0);
-	
 	}
-
-	@Override
-	public List<Skill> getAllSkills() {
-		TypedQuery<Skill> query = em.createQuery("Select s from Skill s", Skill.class);
-		try {
-			return query.getResultList();
-		}
-
-		catch (Exception e) {
-			System.out.print("error");
-		}
-		return null;
-	}
-
-
 
 }

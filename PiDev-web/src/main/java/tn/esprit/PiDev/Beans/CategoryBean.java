@@ -7,10 +7,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
-import tn.esprit.PiDev.entities.Category;
+
 import tn.esprit.PiDev.entities.*;
 import tn.esprit.PiDev.Services.*;
-
 @ManagedBean(name = "categoryBean", eager = true)
 @SessionScoped
 public class CategoryBean {

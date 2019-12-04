@@ -2,6 +2,7 @@ package tn.esprit.PiDev.entities;
 
 import java.io.Serializable;
 
+import tn.esprit.PiDev.entities.QuizQuestion;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,10 +63,12 @@ public class QuestionResponse implements Serializable {
 		this.content = content;
 	}
 
+	/*
 	public QuizQuestion getQuestion() {
 		return question;
 	}
-
+	 */
+	
 	public void setQuestion(QuizQuestion question) {
 		this.question = question;
 	}

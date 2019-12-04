@@ -3,13 +3,16 @@ package tn.esprit.PiDev.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import tn.esprit.PiDev.entities.Employe;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @Entity
 public class UserSkill implements Serializable {
@@ -18,31 +21,31 @@ public class UserSkill implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;/*
+	private long id;
 	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "cin", insertable = true, updatable = true)
-	private Employe user;
-	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id", insertable = true, updatable = true)
+	private Utilisateur user;
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "skill_id", referencedColumnName = "id", insertable = true, updatable = true)
-	private _Skill _Skill;
+	private Skill skill;
 	private int level;
 
 	public UserSkill() {
 
 	}
 
-	public UserSkill(int id, Employe user, _Skill _Skill, int level) {
+	public UserSkill(int id, Utilisateur user, Skill skill, int level) {
 		super();
 		this.id = id;
 		this.user = user;
-		this._Skill = _Skill;
+		this.skill = skill;
 		this.level = level;
 	}
 
-	public UserSkill(Employe user, _Skill _Skill, int level) {
+	public UserSkill(Utilisateur user, Skill skill, int level) {
 		super();
 		this.user = user;
-		this._Skill = _Skill;
+		this.skill = skill;
 		this.level = level;
 	}
 
@@ -54,20 +57,21 @@ public class UserSkill implements Serializable {
 		this.id = id;
 	}
 
-	public Employe getUser() {
+	/*
+	public Utilisateur getUser() {
 		return user;
 	}
-
-	public void setUser(Employe user) {
+*/
+	public void setUser(Utilisateur user) {
 		this.user = user;
 	}
 
-	public _Skill getSkill() {
-		return _Skill;
+	public Skill getSkill() {
+		return skill;
 	}
 
-	public void setSkill(_Skill _Skill) {
-		this._Skill = _Skill;
+	public void setSkill(Skill skill) {
+		this.skill = skill;
 	}
 
 	public int getLevel() {
@@ -77,5 +81,5 @@ public class UserSkill implements Serializable {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-*/
+
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,8 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import tn.esprit.PiDev.entities.Employe;
-/*
+
 @Entity
 public class UserQuiz implements Serializable {
 
@@ -22,9 +22,9 @@ public class UserQuiz implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "cin", insertable = true, updatable = true)
-	private Employe user;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", referencedColumnName = "id", insertable = true, updatable = true)
+	private Utilisateur user;
 	@ManyToOne
 	@JoinColumn(name = "quiz_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Quiz quiz;
@@ -38,7 +38,7 @@ public class UserQuiz implements Serializable {
 		
 	}
 
-	public UserQuiz(long id, Employe user, Quiz quiz, int score) {
+	public UserQuiz(long id, Utilisateur user, Quiz quiz, int score) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -46,7 +46,7 @@ public class UserQuiz implements Serializable {
 		this.score = score;
 	}
 
-	public UserQuiz(Employe user, Quiz quiz, int score) {
+	public UserQuiz(Utilisateur user, Quiz quiz, int score) {
 		super();
 		this.user = user;
 		this.quiz = quiz;
@@ -61,11 +61,11 @@ public class UserQuiz implements Serializable {
 		this.id = id;
 	}
 
-	public Employe getUser() {
+	public Utilisateur getUser() {
 		return user;
 	}
 
-	public void setUser(Employe user) {
+	public void setUser(Utilisateur user) {
 		this.user = user;
 	}
 
@@ -93,4 +93,3 @@ public class UserQuiz implements Serializable {
 		this.currentQuestionIndex = currentQuestionIndex;
 	}
 }
-*/

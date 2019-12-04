@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import tn.esprit.PiDev.entities.Employe;
-/*
+
+
 @Entity
 public class UserQuizResponse implements Serializable {
 
@@ -19,21 +19,21 @@ public class UserQuizResponse implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@ManyToOne
-	@JoinColumn(name="user_id", referencedColumnName="cin", insertable = true, updatable = true)
-	private Employe user;
+	@JoinColumn(name="user_id", referencedColumnName="id", insertable = true, updatable = true)
+	private Utilisateur user;
 	@ManyToOne
 	@JoinColumn(name="response_id", referencedColumnName="id", insertable = true, updatable = true)
 	private QuestionResponse response;
 	private boolean isChecked;
 	public UserQuizResponse() {}
-	public UserQuizResponse(int id, Employe user, QuestionResponse response, boolean isChecked) {
+	public UserQuizResponse(int id, Utilisateur user, QuestionResponse response, boolean isChecked) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.response = response;
 		this.isChecked = isChecked;
 	}
-	public UserQuizResponse( Employe user, QuestionResponse response, boolean isChecked) {
+	public UserQuizResponse( Utilisateur user, QuestionResponse response, boolean isChecked) {
 		super();
 		this.user = user;
 		this.response = response;
@@ -48,11 +48,11 @@ public class UserQuizResponse implements Serializable {
 		this.id = id;
 	}
 
-	public Employe getUser() {
+	public Utilisateur getUser() {
 		return user;
 	}
 
-	public void setUser(Employe user) {
+	public void setUser(Utilisateur user) {
 		this.user = user;
 	}
 
@@ -74,4 +74,3 @@ public class UserQuizResponse implements Serializable {
 	
 	
 }
-*/

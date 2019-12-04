@@ -1,4 +1,4 @@
-package tn.esprit.PiDev.Remotes;
+package tn.esprit.PiDev.Services;
 
 import java.util.List;
 
