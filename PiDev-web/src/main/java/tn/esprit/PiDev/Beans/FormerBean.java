@@ -1,6 +1,7 @@
 package tn.esprit.PiDev.Beans;
 
 
+import java.text.Normalizer.Form;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,7 +10,7 @@ import javax.faces.bean.SessionScoped;
 
 import tn.esprit.PiDev.Services.FormerService;
 import tn.esprit.PiDev.entities.Former;
-
+import tn.esprit.PiDev.entities.Specialty;
 
 @ManagedBean
 @SessionScoped
@@ -18,11 +19,14 @@ public class FormerBean {
 	//zyede
 	private int idFormer;
 	//---
-	private String specialty;
+	private Specialty specialty;
 	private String nameFormer;
 	private String lastNameFormer;
 	List<Former> listFormer;
 	private Former former;
+	
+	//ZYEDE
+	public int idFormerUpdated;
 	
 	@EJB
 	FormerService formerService;
@@ -30,8 +34,11 @@ public class FormerBean {
 	public String ajouter() {
 		
 		Former fr = new Former();
-		formerService.addFormer(new Former(specialty,nameFormer,lastNameFormer));
-	
+		fr.setNameFormer(nameFormer);
+		fr.setLastNameFormer(lastNameFormer);
+		fr.setSpecialty(specialty.JEE);
+		formerService.addFormer(fr);
+		
 		return "/";
 	}
 
@@ -54,7 +61,11 @@ public class FormerBean {
 	
 	public void mettreAjourFormer(Former former)
 	{
-		formerService.updateFormer(new Former(specialty, nameFormer, lastNameFormer));
+		//formerService.updateFormer(new Former(specialty, nameFormer, lastNameFormer));
+		idFormer=former.getIdFormer();
+		nameFormer=former.getNameFormer();
+		lastNameFormer=former.getLastNameFormer();
+		specialty=former.getSpecialty();
 	}
 	
 	public FormerBean() {
@@ -77,14 +88,19 @@ public class FormerBean {
 		this.formers = formers;
 	}
 
+	
 
-	public String getSpecialty() {
+	public Specialty getSpecialty() {
 		return specialty;
 	}
 
-	public void setSpecialty(String specialty) {
+
+
+	public void setSpecialty(Specialty specialty) {
 		this.specialty = specialty;
 	}
+
+
 
 	public String getNameFormer() {
 		return nameFormer;
@@ -136,14 +152,43 @@ public class FormerBean {
 	}
 	
 	
-	public void recupererFormer(Former f) {
+	/*public void recupererFormer(Former f) {
 		initialisation();
 
 		nameFormer = f.getNameFormer();
 		lastNameFormer=f.getLastNameFormer();
-		specialty=f.getSpecialty();
-		this.setIdFormer(f.getIdFormer());
+		
+		//specialty=f.getSpecialty();
+		//this.getIdFormerUpdated(f.getIdFormer());
+	
+	}*/
+
+
+
+	public int getIdFormerUpdated() {
+		return idFormerUpdated;
 	}
 
+
+
+	public void setIdFormerUpdated(int idFormerUpdated) {
+		this.idFormerUpdated = idFormerUpdated;
+	}
+
+	
+	public String updateFormer() {
+		Former ff=formerService.getFormerById(idFormer);	
+		ff.setNameFormer(nameFormer);
+		ff.setLastNameFormer(lastNameFormer);
+		ff.setSpecialty(specialty);
+		
+		
+		formerService.updateFormer(ff);
+		return"Former?faces-redirect=true"; 
+	}
 	//zyede
+	
+	
+	
+	
 }

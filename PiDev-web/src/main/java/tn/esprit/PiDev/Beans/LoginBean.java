@@ -62,6 +62,11 @@ public class LoginBean implements Serializable {
 					navigateTo = "/pages/ticket?faces-redirect=true";
 					loggedIn = true;
 				}
+				else if (employe.getRole() == Role.Former) {
+					System.out.println("id user connecté = " + employe.getId());
+					navigateTo = "/Formation?faces-redirect=true";
+					loggedIn = true;
+				}
 
 			}
 
