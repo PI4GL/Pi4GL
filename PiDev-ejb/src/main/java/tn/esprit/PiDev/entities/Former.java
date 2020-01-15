@@ -21,7 +21,7 @@ public class Former implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idFormer;
-	private String specialty;
+	private Specialty specialty;
 	private String nameFormer;
 	private String lastNameFormer;
 	
@@ -32,6 +32,18 @@ public class Former implements Serializable{
 	public Former() {
 		
 	}
+
+	
+	
+	public Former(Specialty specialty, String nameFormer, String lastNameFormer) {
+		super();
+		this.specialty = specialty;
+		this.nameFormer = nameFormer;
+		this.lastNameFormer = lastNameFormer;
+	}
+
+	
+	
 
 
 	public Integer getIdFormer() {
@@ -44,12 +56,12 @@ public class Former implements Serializable{
 	}
 
 
-	public String getSpecialty() {
+	public Specialty getSpecialty() {
 		return specialty;
 	}
 
 
-	public void setSpecialty(String specialty) {
+	public void setSpecialty(Specialty specialty) {
 		this.specialty = specialty;
 	}
 
@@ -87,6 +99,15 @@ public class Former implements Serializable{
 	public void setFormation(List<Formation> formation) {
 		this.formation = formation;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return nameFormer;
+	}
+	
+	
 		
 	
 	

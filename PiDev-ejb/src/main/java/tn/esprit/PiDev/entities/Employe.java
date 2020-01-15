@@ -48,6 +48,8 @@ public class Employe implements Serializable {
 	@OneToMany(mappedBy="employe")
 	private List<Test> test;
 	
+	@OneToMany(mappedBy="employe")
+	private List<Avis> avis;
 	
 	@OneToMany(mappedBy="employe")
 	private List<WorkedOn> workedOn;
@@ -204,6 +206,14 @@ public class Employe implements Serializable {
 
 	public void setTest(List<Test> test) {
 		this.test = test;
+	}
+
+	public List<Avis> getAvis() {
+		return avis;
+	}
+
+	public void setAvis(List<Avis> avis) {
+		this.avis = avis;
 	}
 	
 	

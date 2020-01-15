@@ -16,7 +16,7 @@ import tn.esprit.PiDev.entities.Client;
 public class ClientService implements ClientRemote{
 	
 
-	@PersistenceContext(unitName = "PiDev-ejb")
+	@PersistenceContext
 	EntityManager em;
 
 
