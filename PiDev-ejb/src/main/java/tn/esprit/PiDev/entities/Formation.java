@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Formation implements Serializable{
@@ -22,12 +24,16 @@ public class Formation implements Serializable{
 	private Integer idFormation;
 	private String titleFormation;
 	private String domaineFormation;
+	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
+	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	
 	@OneToMany(mappedBy="formation")
 	private List<Test> test;
 	
+	@OneToMany(mappedBy="formation")
+	private List<Avis> avis;
 	/*@ManyToMany
 	private List<Employe> employe;*/
 	
@@ -38,6 +44,31 @@ public class Formation implements Serializable{
 		
 	}
 	
+	
+
+	public Formation(String titleFormation, String domaineFormation, Date dateDebut,Date dateFin) {
+		super();
+		this.titleFormation = titleFormation;
+		this.domaineFormation = domaineFormation;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+	}
+
+
+	
+
+	public Formation(String titleFormation, String domaineFormation, Date dateDebut, Date dateFin, List<Test> test,List<Avis> avis, Former former) {
+		super();
+		this.titleFormation = titleFormation;
+		this.domaineFormation = domaineFormation;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.test = test;
+		this.avis = avis;
+		this.former = former;
+	}
+
+
 
 	public Integer getIdFormation() {
 		return idFormation;
@@ -111,6 +142,16 @@ public class Formation implements Serializable{
 
 	public void setTest(List<Test> test) {
 		this.test = test;
+	}
+
+
+	public List<Avis> getAvis() {
+		return avis;
+	}
+
+
+	public void setAvis(List<Avis> avis) {
+		this.avis = avis;
 	}
 	
 		

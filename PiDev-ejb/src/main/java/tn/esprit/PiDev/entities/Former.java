@@ -33,6 +33,18 @@ public class Former implements Serializable{
 		
 	}
 
+	
+	
+	public Former(String specialty, String nameFormer, String lastNameFormer) {
+		super();
+		this.specialty = specialty;
+		this.nameFormer = nameFormer;
+		this.lastNameFormer = lastNameFormer;
+	}
+
+	
+	
+
 
 	public Integer getIdFormer() {
 		return idFormer;
@@ -87,6 +99,15 @@ public class Former implements Serializable{
 	public void setFormation(List<Formation> formation) {
 		this.formation = formation;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return nameFormer;
+	}
+	
+	
 		
 	
 	
