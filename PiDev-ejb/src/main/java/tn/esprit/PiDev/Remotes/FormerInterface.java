@@ -12,6 +12,7 @@ public interface FormerInterface {
 	void addFormer(Former former);
 	void deleteFormer(int idFormer);
 	void updateFormer(Former former);
+	void updateFormer2(Former former);
 	List<Former> getAllFormer();
 	Former getFormerById(int idFormer);
 	Former getFormerByName(String nameFormer);

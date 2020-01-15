@@ -7,12 +7,16 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Former implements Serializable{
 	
@@ -21,29 +25,30 @@ public class Former implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idFormer;
-	private String specialty;
+	@Enumerated(EnumType.STRING)
+	private Specialty specialty;
 	private String nameFormer;
 	private String lastNameFormer;
 	
+
+	/*
 	@OneToMany(mappedBy="former", cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
 	private List<Formation> formation = new ArrayList<Formation>();
-	
+	*/
 	
 	public Former() {
 		
 	}
 
 	
-	
-	public Former(String specialty, String nameFormer, String lastNameFormer) {
+
+	public Former(Specialty specialty, String nameFormer, String lastNameFormer) {
 		super();
 		this.specialty = specialty;
 		this.nameFormer = nameFormer;
 		this.lastNameFormer = lastNameFormer;
 	}
 
-	
-	
 
 
 	public Integer getIdFormer() {
@@ -56,14 +61,18 @@ public class Former implements Serializable{
 	}
 
 
-	public String getSpecialty() {
+	
+
+	public Specialty getSpecialty() {
 		return specialty;
 	}
 
 
-	public void setSpecialty(String specialty) {
+
+	public void setSpecialty(Specialty specialty) {
 		this.specialty = specialty;
 	}
+
 
 
 	public String getNameFormer() {
@@ -90,7 +99,7 @@ public class Former implements Serializable{
 		return serialVersionUID;
 	}
 
-
+/*
 	public List<Formation> getFormation() {
 		return formation;
 	}
@@ -100,7 +109,7 @@ public class Former implements Serializable{
 		this.formation = formation;
 	}
 
-
+*/
 
 	@Override
 	public String toString() {

@@ -8,104 +8,214 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
+<ui:composition template="xhtml/template.xhtml">
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Formation</title>
-</head>
+	<ui:define name="title">Formation</ui:define>
 
-<h:body>
+	<ui:define name="content">
 
+		<div class="container-fluid mt--6">
+			<div class="card mb-3">
+				<!-- Card header -->
 
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputText value="title" />
-			<h:inputText value="#{formationBean.titleFormation}" />
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card-wrapper">
+						<!-- Form controls -->
+						<div class="card">
+							<!-- Card header -->
+							<div class="card-header">
+								<h3 class="mb-0">Formation</h3>
+							</div>
+							<!-- Card body -->
+							<div class="card-body">
+								<h:form>
 
-			<h:outputText value="domain" />
-			<h:inputText value="#{formationBean.domaineFormation}" />
+									
+									
 
-			<h:outputText value="dateD" />
-			<h:inputText value="#{formationBean.dateDebut}" />
+									<div>
+										<label class="form-control-label"
+											for="exampleFormControlInput1">Title</label>
+										<h:inputText value="#{formationBean.titleFormation}"
+											styleClass="form-control" />
+									</div>
 
-			<p:outputLabel for="button" value="Button:" />
-			<p:datePicker id="button" value="#{formationBean.dateFin}" showIcon="true" />
-
-			<h:outputText value="dateF" />
-			<h:inputText value="#{formationBean.dateFin}" />
-			
-			<!-- items -->
-			<h:outputText value="Former" />
-			<h:selectOneMenu value="#{formationBean.former}">
-				<f:selectItems value="#{formationBean.listFormer}" var="f"
-					itemValue="#{f}" itemLabel="#{f.nameFormer}" />
-
-			</h:selectOneMenu>
-
-			<h:commandButton id="btn" value="ajouter"
-				action="#{formationBean.ajouter()}" />
-			<h:message for="btn" />
-
-			<h:dataTable value="#{formationBean.formations}" var="fr" border="1">
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="title" />
-					</f:facet>
-					<h:outputText value="#{fr.titleFormation}" />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="domaine" />
-					</f:facet>
-					<h:outputText value="#{fr.domaineFormation}" />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="dateD" />
-					</f:facet>
-					<h:outputText value="#{fr.dateDebut}" />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="dateF" />
-					</f:facet>
-					<h:outputText value="#{fr.dateFin}" />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Former" />
-					</f:facet>
-					<h:outputText value="#{fr.former}" />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Action" />
-					</f:facet>
-					<h:commandButton
-						action="#{formationBean.supprimerFomation(idFormation)}"
-						value="supprimer" />
-
-				</h:column>
+									<div>
+										<label class="form-control-label"
+											for="exampleFormControlInput1">Domain</label>
+										<h:inputText value="#{formationBean.domaineFormation}"
+											styleClass="form-control" />
+									</div>
 
 
 
+									<label class="form-control-label"
+										for="exampleFormControlInput1">Date Start</label>
+									<input class="form-control" type="date" id="db"
+										value="#{formationBean.dateDebut1}" />
+									<label class="form-control-label"
+										for="exampleFormControlInput1">End Start</label>
+									<input class="form-control" type="date" id="df"
+										value="#{formationBean.dateFin1}" />
+
+
+									<label class="form-control-label"
+										for="exampleFormControlSelect1">Formers</label>
+									<h:selectOneMenu value="#{formationBean.former}"
+										styleClass="form-control">
+										<f:selectItems value="#{formationBean.listFormer}" var="f"
+											itemValue="#{f.idFormer}" itemLabel="#{f.nameFormer}" />
+
+									</h:selectOneMenu>
+
+									<label></label>
+
+									<h:inputText value="#{formationBean.dateDebut}"
+										styleClass="dtb" style="opacity : 0"></h:inputText>
+									<h:inputText value="#{formationBean.dateFin}" styleClass="dtf"
+										style="opacity : 0"></h:inputText>
+
+									<label></label>
+									<div class="col-lg-2">
+										<h:commandButton value="ADD"
+											styleClass="btn btn-primary btn-md"
+											action="#{formationBean.ajouter()}" />
+									
+										<h:commandButton value="Update"
+											action="#{formationBean.updateFormation()}"
+											styleClass="btn btn-success" />
+
+									</div>
+									<label></label>
+
+								</h:form>
+								<h:form>
+
+
+									<div class="card-header border-0">
+										<h3 class="mb-0">Light table</h3>
+									</div>
+
+									<div style="">
+										<h:dataTable value="#{formationBean.formations}" var="fr"
+											border="1" styleClass="table align-items-center table-flush">
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="title" />
+												</f:facet>
+												<h:outputText value="#{fr.titleFormation}"
+													styleClass="form-control" />
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="domaine" />
+												</f:facet>
+												<h:outputText value="#{fr.domaineFormation}"
+													styleClass="form-control" />
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Start Date" />
+												</f:facet>
+												<h:outputText value="#{fr.dateDebut}"
+													styleClass="form-control" />
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="End Date" />
+												</f:facet>
+												<h:outputText value="#{fr.dateFin}"
+													styleClass="form-control" />
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Former" />
+												</f:facet>
+												<h:outputText value="#{fr.former}" styleClass="form-control" />
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Action(1)" />
+												</f:facet>
+												<h:commandButton
+													action="#{formationBean.supprimerFomation(fr.idFormation)}"
+													value="DELETE" styleClass="btn btn-danger" />
+
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Action (2)" />
+												</f:facet>
+
+												<h:commandButton
+													action="#{formationBean.mettreAjourFormation(fr)}"
+													value="UPDATE" styleClass="btn btn-warning" />
+
+
+											</h:column>
+
+
+										</h:dataTable>
+									</div>
+
+
+								</h:form>
+							</div>
+						</div>
+						<!-- HTML5 inputs -->
+
+					</div>
+				</div>
+
+			</div>
+			<!-- Footer -->
+			<footer class="footer pt-0">
+
+			</footer>
+		</div>
+
+
+	</ui:define>
+
+
+	<ui:define name="js">
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<h:outputScript>
+		
+		$(function(){
+
+			  $("#db").change(
+					function(){
+					
+						$(".dtb").val($("#db").val());
+						
+					}	  
+			  );
+			  
+			   $("#df").change(
+					function(){
+						$(".dtf").val($("#df").val());
+							
+					}	  
+			  );
+
+			});
+		
+		</h:outputScript>
+	</ui:define>
 
 
 
-			</h:dataTable>
-		</h:panelGrid>
-	</h:form>
-
-
-
-
-</h:body>
-
-
+</ui:composition>
 </html>

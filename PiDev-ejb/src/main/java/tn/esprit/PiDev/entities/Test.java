@@ -11,7 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Test implements Serializable{
 
@@ -20,22 +23,26 @@ public class Test implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idTest;
-	@Enumerated(EnumType.STRING)
-	private Score score ;
+	//@Enumerated(EnumType.STRING)
+	//private Score score ;
 	private String titeTest;
-	private String Speciality;
+	private String descriptionTest;
+	//private String Speciality;
 	
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="cin",referencedColumnName="cin",insertable=false,updatable=false)
-	private Employe employe;
+	private Employe employe;*/
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="idFormation",referencedColumnName="idFormation",insertable=false,updatable=false)
+	private Formation formation;*/
+	
+	@OneToOne
 	private Formation formation;
 	
-	@EmbeddedId
-	private TestID testId;
+	/*@EmbeddedId
+	private TestID testId;*/
 	
 	public Test() {
 		
@@ -49,13 +56,13 @@ public class Test implements Serializable{
 		this.idTest = idTest;
 	}
 
-	public Score getScore() {
+	/*public Score getScore() {
 		return score;
 	}
 
 	public void setScore(Score score) {
 		this.score = score;
-	}
+	}*/
 
 	public String getTiteTest() {
 		return titeTest;
@@ -65,20 +72,20 @@ public class Test implements Serializable{
 		this.titeTest = titeTest;
 	}
 
-	public String getSpeciality() {
+	/*public String getSpeciality() {
 		return Speciality;
 	}
 
 	public void setSpeciality(String speciality) {
 		Speciality = speciality;
 	}
-
+*/
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	
-
+/*
 	public Employe getEmploye() {
 		return employe;
 	}
@@ -94,14 +101,32 @@ public class Test implements Serializable{
 	public void setFormation(Formation formation) {
 		this.formation = formation;
 	}
-
+*//*
 	public TestID getTestId() {
 		return testId;
 	}
 
 	public void setTestId(TestID testId) {
 		this.testId = testId;
+	}*/
+
+	public String getDescriptionTest() {
+		return descriptionTest;
 	}
+
+	public void setDescriptionTest(String descriptionTest) {
+		this.descriptionTest = descriptionTest;
+	}
+
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
+	}
+
+	
 	
 	
 	

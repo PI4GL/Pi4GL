@@ -8,77 +8,172 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
+<ui:composition template="xhtml/template.xhtml">
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Former</title>
-</head>
+	<ui:define name="title">Former</ui:define>
 
-<h:body>
-	
+	<ui:define name="content">
 
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputText value="name" />
-				<h:inputText value="#{formerBean.nameFormer}" />
+		<div class="container-fluid mt--6">
+			<div class="card mb-3">
+				<!-- Card header -->
 
-				<h:outputText value="lastName" />
-				<h:inputText value="#{formerBean.lastNameFormer}" />
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card-wrapper">
+						<!-- Form controls -->
+						<div class="card">
+							<!-- Card header -->
+							<div class="card-header" >
+								<h3 class="mb-0">Former</h3>
+							</div>
+							<!-- Card body -->
+							<div class="card-body">
+								<h:form>
 
-				<h:outputText value="specialty" />
-				<h:inputText value="#{formerBean.specialty}" />
+									<div>
+										<label class="form-control-label"
+											for="exampleFormControlInput1">Name</label>
+										<h:inputText value="#{formerBean.nameFormer}"
+											styleClass="form-control" />
+									</div>
 
-
-				<h:commandButton id="btn" value="ajouter" action="#{formerBean.ajouter()}" />
-				<h:message for="btn" />
-
-				<h:dataTable value="#{formerBean.formers}" var="f" border="1">
-
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="name" />
-						</f:facet>
-						<h:outputText value="#{f.nameFormer}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="last name" />
-						</f:facet>
-						<h:outputText value="#{f.lastNameFormer}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="specialty" />
-						</f:facet>
-						<h:outputText value="#{f.specialty}" />
-					</h:column>
+									<div>
+										<label class="form-control-label"
+											for="exampleFormControlInput1">Last Name</label>
+										<h:inputText value="#{formerBean.lastNameFormer}"
+											styleClass="form-control" />
+									</div>
 
 
+									<div>
+										<label class="form-control-label"
+											for="exampleFormControlSelect1">Speciality</label>
+										<h:selectOneMenu value="#{formerBean.specialty}"
+											styleClass="form-control">
+											<f:selectItems value="#{specialtyBean.spec}" />
 
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="Action" />
-						</f:facet>
-
-						<h:commandButton
-							action="#{formerBean.supprimerFormer(f.idFormer)}"
-							value="supprimer" />
-
-
-					</h:column>
-
-
-
-				</h:dataTable>
-			</h:panelGrid>
-		</h:form>
-	
+										</h:selectOneMenu>
+									</div>
+									<label></label>
+									<div class="col-lg-2">
+										<label></label>
+										<h:commandButton  value="ADD" 
+											action="#{formerBean.ajouter()}" styleClass="btn btn-primary btn-md"/>
+										
+										<h:commandButton  value="Update" 
+											action="#{formerBean.updateFormer()}" styleClass="btn btn-success"/>
+										
+									</div>
+									
+									<label></label>
 
 
 
-</h:body>
+
+									<div class="card-header border-0">
+										<h3 class="mb-0">Light table</h3>
+									</div>
+
+									<div style="">
+										<h:dataTable value="#{formerBean.formers}" var="f" border="1"
+											styleClass="table align-items-center table-flush">
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="name" />
+												</f:facet>
+												<h:outputText value="#{f.nameFormer}"
+													styleClass="form-control" />
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="last name" />
+												</f:facet>
+												<h:outputText value="#{f.lastNameFormer}"
+													styleClass="form-control" />
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="specialty" />
+												</f:facet>
+												<h:outputText value="#{f.specialty}"
+													styleClass="form-control" />
+											</h:column>
 
 
+
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Action (1)" />
+												</f:facet>
+
+												<h:commandButton
+													action="#{formerBean.supprimerFormer(f.idFormer)}"
+													value="DELETE" styleClass="btn btn-danger" />
+
+
+											</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Action (2)" />
+												</f:facet>
+
+												<h:commandButton
+													action="#{formerBean.mettreAjourFormer(f)}"
+													value="UPDATE" styleClass="btn btn-warning" />
+
+
+											</h:column>
+
+
+
+										</h:dataTable>
+									</div>
+								</h:form>
+							</div>
+						</div>
+						<!-- HTML5 inputs -->
+
+					</div>
+				</div>
+
+			</div>
+			<!-- Footer -->
+			<footer class="footer pt-0">
+			<div class="row align-items-center justify-content-lg-between">
+				<div class="col-lg-6">
+					<div class="copyright text-center text-lg-left text-muted">
+						© 2019 <a href="https://www.creative-tim.com"
+							class="font-weight-bold ml-1" target="_blank">AdvyTeam</a>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<ul
+						class="nav nav-footer justify-content-center justify-content-lg-end">
+						<li class="nav-item"><a href="https://www.creative-tim.com"
+							class="nav-link" target="_blank">AdvyTeam</a></li>
+						<li class="nav-item"><a
+							href="https://www.creative-tim.com/presentation" class="nav-link"
+							target="_blank">About Us</a></li>
+						<li class="nav-item"><a href="http://blog.creative-tim.com"
+							class="nav-link" target="_blank">Blog</a></li>
+						<li class="nav-item"><a
+							href="https://www.creative-tim.com/license" class="nav-link"
+							target="_blank">License</a></li>
+					</ul>
+				</div>
+			</div>
+			</footer>
+		</div>
+
+
+	</ui:define>
+
+</ui:composition>
 </html>

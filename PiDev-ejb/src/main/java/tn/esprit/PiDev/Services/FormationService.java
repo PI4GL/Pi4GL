@@ -38,6 +38,11 @@ public class FormationService implements FormationInterface {
 	public List<Formation> getAllFormation() {
 		return em.createQuery("from Formation",Formation.class).getResultList();
 	}
+	
+	public List<Formation> getAllFormationN() {
+		return em.createQuery("Select f from Formation f where f != All (Select t.formation from Test t where t.formation != null)",Formation.class).getResultList();
+	}
+
 
 	@Override
 	public Formation getFormationById(int idFormation) {

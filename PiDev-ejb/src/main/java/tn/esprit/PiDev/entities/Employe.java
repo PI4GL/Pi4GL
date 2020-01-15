@@ -41,11 +41,11 @@ public class Employe implements Serializable {
 	private Date hiringDate;
 	private float salary;
 	
-	@OneToMany(mappedBy="employe")
+	/*@OneToMany(mappedBy="employe")
 	private List<Test> test;
 	
 	@OneToMany(mappedBy="employe")
-	private List<Avis> avis;
+	private List<Avis> avis;*/
 	
 	@OneToMany(mappedBy="employe")
 	private List<WorkedOn> workedOn;
@@ -190,7 +190,7 @@ public class Employe implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+/*
 	public List<Test> getTest() {
 		return test;
 	}
@@ -207,6 +207,6 @@ public class Employe implements Serializable {
 		this.avis = avis;
 	}
 	
-	
+	*/
 	
 }
