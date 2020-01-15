@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough" lang="fr"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/xhtml/template.xhtml">
+
+
+         
+       <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Category Section</title>
+</head>
+        <h:body >
+            
+		<!-- Default form login -->
+		<div >
+			<div>
+				<br></br>
+				<div >
+					<h:form  >
+						<h2>Add a new Category!</h2>
+						<h5>Enter name</h5>
+						<h:inputText>
+							value="#{categoryBean.name}">
+							<f:ajax listener="#{categoryBean.verifyExistance}"
+								render="add-category-btn" />
+						</h:inputText>
+
+						<h5>Description</h5>
+						<h:inputText >
+							value="#{categoryBean.description}">
+						</h:inputText>
+						<br></br>
+						<br></br>
+						<br></br>
+
+						<h:commandButton
+							action="#{categoryBean.addCategory}" type="submit"
+							value="Add category!" id="add-category-btn"
+							disabled="#{!categoryBean.canAddCategory}" />
+							
+												<h:commandButton action="category_crud.xhtml?faces-redirect=true"
+						data-toggle="modal" value="Browse Categories"
+						class=""></h:commandButton>
+							
+					</h:form>
+				</div>
+			</div>
+		</div>
+		</h:body>
+
+</ui:composition>

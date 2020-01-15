@@ -1,9 +1,11 @@
 package tn.esprit.PiDev.entities;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,6 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -30,7 +34,7 @@ public class Employe implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cin ;
+	protected int cin ;
 	
 	private String firstName;
 	private String lastName;
@@ -53,11 +57,11 @@ public class Employe implements Serializable {
 	/*@ManyToMany(mappedBy="employe")
 	private List<Formation> formation = new ArrayList<Formation>();*/
 	
+
+
 	
 	
-	public List<WorkedOn> getWorkedOn() {
-		return workedOn;
-	}
+
 
 	public void setWorkedOn(List<WorkedOn> workedOn) {
 		this.workedOn = workedOn;
@@ -186,6 +190,11 @@ public class Employe implements Serializable {
 	public void setFormation(List<Formation> formation) {
 		this.formation = formation;
 	}*/
+
+
+	public Employe(int cin2) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
