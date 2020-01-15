@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="utf-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		
+					<title><ui:insert name="title"></ui:insert></title> <!-- Extra details for Live View on GitHub Pages -->
+					<!-- Canonical SEO -->
+					<link rel="canonical"
+						href="https://www.creative-tim.com/product/argon-dashboard-pro" />
+
+					<!-- Fonts -->
+	<link rel=""
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+		<!-- Icons -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/assets/vendor/nucleo/css/nucleo.css"
+		type="text/css" />
+		<link rel="stylesheet"
+			href="#{request.contextPath}/assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css"
+			type="text/css" />
+			<!-- Page plugins -->
+			<!-- Argon CSS -->
+			<link rel="stylesheet"
+				href="#{request.contextPath}/assets/css/argon.min9f1e.css?v=1.1.0"
+				type="text/css" />
+</h:head>
+<h:body>
+	<ui:include src="/xhtml/navM.xhtml"/>
+	
+	<div class="main-content" id="panel">
+	
+	<ui:include src="/xhtml/menu.xhtml"/>
+	
+	<ui:insert name="content"></ui:insert>
+	
+	<ui:include src="/xhtml/footer.xhtml"/>
+	</div>
+
+
+
+
+	<script
+		src="#{request.contextPath}/assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script
+		src="#{request.contextPath}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="#{request.contextPath}/assets/vendor/js-cookie/js.cookie.js"></script>
+	<script
+		src="#{request.contextPath}/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+	<script
+		src="#{request.contextPath}/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+	<!-- Optional JS -->
+	<script
+		src="#{request.contextPath}/assets/vendor/chart.js/dist/Chart.min.js"></script>
+	<script
+		src="#{request.contextPath}/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+	<!-- Argon JS -->
+	<script src="#{request.contextPath}/assets/js/argon.min9f1e.js?v=1.1.0"></script>
+	<!-- Demo JS - remove this in your project -->
+	<script src="#{request.contextPath}/assets/js/demo.min.js"></script>
+</h:body>
+</html>

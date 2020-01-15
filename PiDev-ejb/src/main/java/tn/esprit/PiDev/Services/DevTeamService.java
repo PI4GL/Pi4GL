@@ -16,7 +16,7 @@ import tn.esprit.PiDev.entities.Employe;
 @Stateless
 @LocalBean
 public class DevTeamService implements DevTeamRemote {
-	@PersistenceContext(unitName = "PiDev-ejb")
+	@PersistenceContext
 	EntityManager em;
 	
 	
