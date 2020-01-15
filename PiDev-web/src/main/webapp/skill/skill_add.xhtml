@@ -30,19 +30,10 @@
 								render="add-skill-btn" />
 						</h:inputText>
 
-						<h5>Description</h5>
+						<h5>Category</h5>
 						<h:inputText class="wrap-input100 validate-input"
-							value="#{skillBean.description}">
+							value="#{skillBean.category}">
 						</h:inputText>
-
-						<h:selectOneMenu class="browser-default custom-select"
-							value="#{skillBean.categoryId}">
-							<f:ajax listener="#{skillBean.verifyExistance}"
-								render="skill-select start-quiz-btn quiz-msg" />
-							<f:selectItem itemLabel="Select a category" />
-							<f:selectItems value="#{skillBean.categories}" var="category"
-								itemValue="#{category.id}" itemLabel="#{category.name}" />
-						</h:selectOneMenu>
 
 						<br></br>
 						<br></br>
@@ -54,7 +45,7 @@
 							 />
 
 						<h:commandButton action="skill_crud.xhtml?faces-redirect=true"
-							data-toggle="modal" value="Browse Categories"
+							data-toggle="modal" value="Browse Skills"
 							class="btn btn-info btn-block my-4"></h:commandButton>
 
 					</h:form>

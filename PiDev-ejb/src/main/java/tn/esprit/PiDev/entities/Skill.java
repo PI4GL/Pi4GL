@@ -1,82 +1,53 @@
 package tn.esprit.PiDev.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
-public class Skill implements Serializable {
-
+public class Skill implements Serializable{
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private int skillId;
+	private String category;
 	private String name;
-	private String description;
-	@ManyToOne(cascade= {CascadeType.PERSIST})
-	private Category category;
-	@OneToMany(mappedBy="skill", fetch = FetchType.EAGER)
-	private List<Quiz> quizzes;
 	
-	
-	public List<Quiz> getQuizzes() {
-		return quizzes;
-	}
-
-	public void setQuizzes(List<Quiz> quizzes) {
-		this.quizzes = quizzes;
-	}
-
-	public Skill(long id, String name, String description,  Category category, List<Quiz> quizzes) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.category = category;
-		this.quizzes = quizzes;
-	}
-	
-
 	public Skill() {
 		super();
 	}
 	
-	public Skill(String name, String description,  Category category ) {
+	public Skill(int skillId, String category, String name) {
 		super();
-		this.name = name;
-		this.description = description;
+		this.skillId = skillId;
 		this.category = category;
-	}
-	
-	public Skill(long id, String name, String description,  Category category ) {
-		super();
-		this.id = id;
 		this.name = name;
-		this.description = description;
-		this.category = category;
 	}
 
-	public Skill(String name, Category category, String description) {
-		this.name = name;
-		this.description = description;
+	public Skill(String name, String category) {
+		super();
+		
 		this.category = category;
+		this.name = name;	// TODO Auto-generated constructor stub
 	}
 
-	// @OneToMany(mappedBy="skill")
-	public long getId() {
-		return id;
+	public int getSkillId() {
+		return skillId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getName() {
 		return name;
@@ -84,19 +55,42 @@ public class Skill implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDescription() {
-		return description;
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + skillId;
+		return result;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Skill other = (Skill) obj;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (skillId != other.skillId)
+			return false;
+		return true;
 	}
 	
-	/*
-	public Category getCategory() {
-		return category;
-	}*/
-	public void setCategory(Category category) {
-		this.category = category;
-	}
 	
+	
+
 }

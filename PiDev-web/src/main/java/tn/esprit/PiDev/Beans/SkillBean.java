@@ -11,31 +11,62 @@ import javax.faces.event.AjaxBehaviorEvent;
 import tn.esprit.PiDev.entities.*;
 import tn.esprit.PiDev.Services.*;
 
+
+
 @ManagedBean(name = "skillBean", eager = true)
 @SessionScoped
 public class SkillBean {
 
 	@EJB
 	SkillService skillService;
-	@EJB
-	CategoryService categoryService;
+
 
 	private String name;
-	private String description;
-	private long categoryId; // to add
-
+	private String category;
+	
 	boolean canAddSkill = false;
 	List<Skill> skills;
-	List<Category> categories;
 
-	long toUpdateSkillId;
+
+	int toUpdateSkillId;
 
 	@PostConstruct
 	public void init() {
 		System.out.println("init called.");
-		skills = getAllSkills();
-		categories = categoryService.ListAllCategories();
+		skills = skillService.listAll();
+		
+	}
 
+	public SkillService getSkillService() {
+		return skillService;
+	}
+
+	public void setSkillService(SkillService skillService) {
+		this.skillService = skillService;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+
+	public int getToUpdateSkillId() {
+		return toUpdateSkillId;
+	}
+
+	public void setToUpdateSkillId(int toUpdateSkillId) {
+		this.toUpdateSkillId = toUpdateSkillId;
 	}
 
 	public String addSkill() {
@@ -44,15 +75,11 @@ public class SkillBean {
 		if (name == null || name.isEmpty())
 			return "";
 
-		Category category = categoryService.getCategoryById(categoryId);
-
-		if (category == null)
-			return "";
-
-		skillService.addSkill(new Skill(name, description, category));
+		
+		skillService.persistSkill(new Skill(name, category) );
 
 		name = null;
-		description = null;
+		category = null;
 
 		return "skill_crud.xhtml?faces-redirect=true";
 	}
@@ -67,55 +94,48 @@ public class SkillBean {
 
 		Skill selectedSkill = skillService.getSkillByName(name);
 
-		Category category = categoryService.getCategoryById(categoryId);
-
-		if (category == null) {
-			canAddSkill = false;
-			return;
-		}
+	
 
 		canAddSkill = selectedSkill == null;
 	}
 
-	public List<Skill> getAllSkills() {
-		return categoryService.getAllSkills();
-	}
 
-	public String goToEditSkill(long skillId) {
-		Skill skill = skillService.getSkillById(skillId);
+
+	public String goToEditSkill(int skillId) {
+		Skill skill = skillService.findSkill(skillId);
 
 		if (skill == null)
 			return "";
 
 		toUpdateSkillId = skillId;
 		name = skill.getName();
-		description = skill.getDescription();
+		category = skill.getCategory();
 		canAddSkill = true;
 
 		return "skill_update.xhtml?faces-redirect=true";
 	}
 
 	public String updateSkill() {
-		Skill skill = skillService.getSkillById(toUpdateSkillId);
+		Skill skill = skillService.findSkill(toUpdateSkillId);
 
 		if (skill == null)
 			return "";
 
 		skill.setName(name);
-		skill.setDescription(description);
+		skill.setCategory(category);
 
-		skillService.updateSkill(skill);
+		skillService.mergeSkill(skill);
 
 		return "skill_crud.xhtml?faces-redirect=true";
 	}
 
-	public String deleteSkill(long skillId) {
-		Skill skill = skillService.getSkillById(skillId);
+	public String deleteSkill(int skillId) {
+		Skill skill = skillService.findSkill(skillId);
 
 		if (skill == null)
 			return "";
 
-		skillService.deleteSkill(skill);
+		skillService.removeSkill(skill);
 
 		return "skill_crud.xhtml?faces-redirect=true";
 	}
@@ -132,13 +152,7 @@ public class SkillBean {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 
 	public boolean isCanAddSkill() {
 		return canAddSkill;
@@ -148,20 +162,8 @@ public class SkillBean {
 		this.canAddSkill = canAddSkill;
 	}
 
-	public long getCategoryId() {
-		return categoryId;
-	}
 
-	public void setCategoryId(long categoryId) {
-		this.categoryId = categoryId;
-	}
 
-	public List<Category> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
-	}
+	
 
 }

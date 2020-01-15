@@ -28,8 +28,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type")
 public class Utilisateur implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -53,7 +51,7 @@ public class Utilisateur implements Serializable {
 	@Column(columnDefinition = "MEDIUMTEXT")
 	//@JsonIgnore
 	private String image;
-	@Enumerated(EnumType.STRING)
+
 	@JsonIgnore
 	private boolean firstLogin;
 

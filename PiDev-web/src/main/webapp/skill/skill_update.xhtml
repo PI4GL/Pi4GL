@@ -13,7 +13,7 @@
          
        <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Category Section</title>
+<title>Skill Section</title>
 </head>
 
 		<!-- Default form login -->
@@ -26,13 +26,12 @@
 						<h5>Name</h5>
 						<h:inputText class="wrap-input100 validate-input"
 							value="#{skillBean.name}">
-							<f:ajax listener="#{skillBean.verifyExistance}"
-								render="add-category-btn" />
+			
 						</h:inputText>
 
-						<h5>Description</h5>
+						<h5>Category</h5>
 						<h:inputText class="wrap-input100 validate-input"
-							value="#{skillBean.description}">
+							value="#{skillBean.category}">
 						</h:inputText>
 						<br></br>
 						<br></br>

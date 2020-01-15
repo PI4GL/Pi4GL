@@ -1,6 +1,7 @@
 package ressources;
 
 import javax.ejb.EJB;
+
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -17,6 +18,7 @@ import javax.ws.rs.core.Response.Status;
 
 import tn.esprit.PiDev.entities.*;
 import tn.esprit.PiDev.Remotes.*;
+
 @Path("skills")
 @RequestScoped
 public class SkillResource {
@@ -25,7 +27,7 @@ public class SkillResource {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addSkill(Competence s) {
+	public Response addSkill(Skill s) {
 		if (s != null) {
 			ss.persistSkill(s);
 			return Response.status(Status.CREATED).entity("OK: " + s.getCategory() + ": " + s.getName() + " ajouté")
@@ -37,7 +39,7 @@ public class SkillResource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateSkill(Competence s) {
+	public Response updateSkill(Skill s) {
 		ss.mergeSkill(s);
 		return Response.status(Status.OK).entity("Skill modified").build();
 	}

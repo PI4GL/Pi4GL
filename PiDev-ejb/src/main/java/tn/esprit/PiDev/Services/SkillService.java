@@ -9,147 +9,82 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import tn.esprit.PiDev.entities.Utilisateur;
-import tn.esprit.PiDev.entities.Category;
-import tn.esprit.PiDev.entities.QuestionResponse;
-import tn.esprit.PiDev.entities.Quiz;
-import tn.esprit.PiDev.entities.QuizQuestion;
-import tn.esprit.PiDev.entities.Skill;
-import tn.esprit.PiDev.entities.UserSkill;
-import tn.esprit.PiDev.Remotes.ResponseServiceRemote;
-import tn.esprit.PiDev.Remotes.SkillServiceRemote;
+import tn.esprit.PiDev.Remotes.SkillServiceLocal;
+import tn.esprit.PiDev.entities.Skill;;
 
 @Stateless
 @LocalBean
-public class SkillService implements SkillServiceRemote {
-
+public class SkillService implements SkillServiceLocal {
 	@PersistenceContext
 	EntityManager em;
 
-	public Skill getSkillById(long skillId) {
-		return em.find(Skill.class, skillId);
-
-	}
-
 	@Override
-	public Skill addSkill(Skill skill) {
-		em.persist(em.contains(skill) ? skill : em.merge(skill));
-		return skill;
-
-	}
-
-	@Override
-	public Skill updateSkill(Skill skill) {
-		em.persist(em.contains(skill) ? skill : em.merge(skill));
-		return skill;
-	}
-
-	@Override
-	public void updateUserSkill(UserSkill userSkill) {
-		em.persist(em.contains(userSkill) ? userSkill : em.merge(userSkill));
-	}
-
-	@Override
-	public void deleteSkill(Skill skill) {
-		em.remove(em.contains(skill) ? skill : em.merge(skill));
-
-	}
-
-	@Override
-	public Skill addCategory(Skill skill, Category category) {
-		skill.setCategory(category);
+	public void persistSkill(Skill skill) {
 		em.persist(skill);
-		return skill;
 	}
-
 	@Override
-	public List<Utilisateur> listUsers(Skill skill) {
-		TypedQuery<Utilisateur> query = em.createQuery("Select u from Utilisateur where u.skill=:skill",
-				Utilisateur.class);
+	public Skill findSkill(int id) {
+		return em.find(Skill.class, id);
+	}
+	@Override
+	public void removeSkill(Skill skill) {
+		em.remove(em.contains(skill) ? skill : em.merge(skill));
+	}
+	@Override
+	public Skill mergeSkill(Skill skill) {
+		return em.merge(skill);
+	}
+	@Override
+	public boolean contains(Skill skill) {
+		return em.contains(skill);
+	}
+	@Override
+	public int removeSkillById(String id) {
+		int idS = Integer.parseInt(id);
+		Query query = em.createQuery("DELETE FROM Skill s WHERE s.skillId = :id");
+		return query.setParameter("id", idS).executeUpdate();
+	}
+	@Override
+	public long getCountByCategory(String category) {
+		TypedQuery<Long> query = em.createQuery("SELECT count(s) FROM Skill s WHERE s.category LIKE CONCAT('%',:category,'%')",Long.class);
+		return query.setParameter("category", category).getSingleResult();
+	}/*
+	@Override
+	public long getCountByName(int id) {
+		Skill s = new Skill();
 		try {
-			return query.getResultList();
+			s = em.find(Skill.class, id);
+		}catch (Exception e) {
 		}
-
-		catch (Exception e) {
-			System.out.print("error");
-		}
-		return null;
+		TypedQuery<Long> query = em.createQuery("SELECT count(r) FROM Resume r where :name MEMBER OF r.skills)",Long.class);
+		return query.setParameter("name", s).getSingleResult();
+	}*/
+	@Override
+	public List<Skill> searchByName(String name) {
+		TypedQuery<Skill> query = em.createQuery("SELECT s FROM Skill s where s.name LIKE CONCAT('%',:name,'%')",Skill.class);
+		return query.setParameter("name", name).getResultList();
+	}
+	@Override
+	public List<Skill> searchByCategory(String category) {
+		TypedQuery<Skill> query = em.createQuery("SELECT s FROM Skill s where s.category LIKE CONCAT('%',:category,'%')",Skill.class);
+		return query.setParameter("category",category).getResultList();
+	}
+	@Override
+	public List<Skill> listAll() {
+		TypedQuery<Skill> query = em.createQuery("SELECT s FROM Skill s",Skill.class);
+		return query.getResultList();
 	}
 
 	@Override
-	public List<Quiz> listQuizzes(Skill skill) {
-		TypedQuery<Quiz> query = em.createQuery("Select q from Quiz q where q.skill=:skill", Quiz.class);
-		try {
-			return query.getResultList();
-		}
-
-		catch (Exception e) {
-			System.out.print("error");
-		}
-		return null;
+	public List<String> getCategories() {
+		TypedQuery<String> query = em.createQuery("SELECT DISTINCT(s.category) from Skill s",String.class);
+		return query.getResultList();
 	}
-
-	
-	
 	@Override
-	public List<Skill> getSkillsByCategoryId(long categoryId) {
-		List<Skill> skills = em
-				.createQuery("SELECT S FROM " + Skill.class.getName() + " S" + " WHERE S.category.id = :categoryId",
-						Skill.class)
-				.setParameter("categoryId", categoryId).getResultList();
-
-		return skills;
+	public long getCountByName(int id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	@Override
-	public List<Quiz> getQuizBySkillId(long skillId) {
-		List<Quiz> quizzes = em
-				.createQuery("SELECT Q FROM " + Quiz.class.getName() + " Q" + " WHERE Q.skill.id = :skillId",
-						Quiz.class)
-				.setParameter("skillId", skillId).getResultList();
-
-		return quizzes;
-	}
-
-	@Override
-	public UserSkill getOrCreateUserSkill(long userId, long skillId) {
-		List<UserSkill> userSkills = em
-				.createQuery("SELECT US FROM " + UserSkill.class.getName() + " US"
-						+ " WHERE US.user.id = :userId AND US.skill.id = :skillId", UserSkill.class)
-				.setParameter("userId", userId).setParameter("skillId", skillId).getResultList();
-
-		UserSkill userSkill = null;
-
-		// Does it exist?
-		if (userSkills == null || userSkills.size() == 0) {
-			// Then create one
-
-			Utilisateur user = em.find(Utilisateur.class, userId);
-
-			if (user == null) {
-				System.out.println("Got a non-valid user id: " + userId + ".");
-				return null;
-			}
-
-			Skill skill = em.find(Skill.class, skillId);
-
-			if (skill == null) {
-				System.out.println("Got a non-valid skill id: " + skillId + ".");
-				return null;
-			}
-
-			// 0 for actual relation level, to start with quiz 1, and so...
-			userSkill = new UserSkill(user, skill, 0);
-			em.persist(userSkill);
-
-		} else {
-			userSkill = userSkills.get(0);
-		}
-
-		return userSkill;
-
-	}
-
 	@Override
 	public Skill getSkillByName(String skillName) {
 		Query query = em.createQuery("SELECT S FROM " + Skill.class.getName() + " S WHERE S.name=:name");
