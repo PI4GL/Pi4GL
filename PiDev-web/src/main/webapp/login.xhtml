@@ -1,0 +1,35 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+      
+  
+      
+<div class="card-body px-lg-5 py-lg-5">
+              <div class="text-center text-muted mb-4">
+   
+              </div>
+               <h:form id="form">
+                                <div class="form-group">
+                                      <h:outputText value="Login" class=" form-control-label"/>
+                                       <h:inputText value="#{loginBean.login}" class="au-input au-input--full" type="email"/>
+                                </div>
+                                <div class="form-group">
+                                       <h:outputText value="Password" class=" form-control-label"/>
+                                       <h:inputText value="#{loginBean.password}" class="au-input au-input--full" type="password"/>
+                                
+                                </div>
+                               
+                
+                                <h:commandButton id="btn" action="#{loginBean.doLogin}" value="Sign in" class="au-btn au-btn--block au-btn--green m-b-20"/>
+                                <div class="social-login-content">
+                                  
+                                </div>
+                                <h:message for="btn"></h:message>
+                                
+                            </h:form>
+            </div>      
+      
+ 
+
+</html> 

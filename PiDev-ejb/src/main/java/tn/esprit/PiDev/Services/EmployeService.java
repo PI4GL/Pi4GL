@@ -17,7 +17,7 @@ import tn.esprit.PiDev.entities.Employe;
 @Stateless
 @LocalBean
 public class EmployeService implements EmployeServiceRemote{
-	@PersistenceContext(unitName = "PiDev-ejb")
+	@PersistenceContext
 	EntityManager em;
 	
 

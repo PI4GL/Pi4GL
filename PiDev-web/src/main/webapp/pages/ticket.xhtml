@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/xhtml/templateM.xhtml">
+
+	<ui:define name="title">TimeSheet Employee</ui:define>
+
+	<ui:define name="content">
+
+            <!-- Ajout**********************  -->
+                   <!-- Ajout**********************  -->
+     <h:form class="form-horizontal">
+     <br/>
+     <br/>
+     <br/>
+       <br/>
+            
+<div class="card">
+                                    
+<div class="card-header">
+                                        <strong>New</strong> Ticket
+                                    </div>
+                                    
+<div class="card-body card-block">
+                                       
+                                            
+<div class="row form-group">
+                                                
+<div class="col col-md-3">
+                                             <h:outputText value="Title" class=" form-control-label"/>
+                                                </div>
+                                                
+<div class="col-12 col-md-9">
+                                                   	<h:inputText value="#{ticketBean.title}" class="form-control"/>
+                                                    
+                                             
+                                                </div>
+                                            </div>
+                                            
+                                            
+<div class="row form-group">
+                                                
+<div class="col col-md-3">
+                                                    <h:outputText value="Description" class=" form-control-label"/>
+                                                </div>
+                                                
+<div class="col-12 col-md-9">
+                                                   	<h:inputText value="#{ticketBean.description}" class="form-control"/>
+                                                    
+                                             
+                                                </div>
+                                            </div> 
+                                            
+<div class="row form-group">
+                                                
+<div class="col col-md-3">
+                                                    <h:outputText value="Hours estimated" class=" form-control-label"/>
+                                                </div>
+                                                
+<div class="col-12 col-md-9">
+                                                   	<h:inputText value="#{ticketBean.estimatedHours}" class="form-control"/>
+                                                    
+                                             
+                                                </div>
+                                            </div>                                           
+
+                                    
+                                    </div>
+                                    
+<div class="card-footer">
+<h:commandButton action="#{ticketBean.addTicket()}" value="create ticket" class="btn btn-primary btn-sm"/>
+                                                                            
+                                    
+                                        <button type="reset" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-ban" /> Reset
+                                        </button>
+                                    </div>
+                                </div>
+     <!-- Fitre **********************  -->
+
+	<div class="col col-sm-6">
+   	<h:outputText value="Ticket status" class="form-control-label"/>
+	<h:selectOneMenu value="#{ticketBean.status}" class="form-control-lg form-control">
+		<f:selectItem itemLabel="Select a status" itemValue=""  />
+		<f:selectItems value="#{dataStatus.status}"/>
+	</h:selectOneMenu>
+
+	<h:commandButton action="#{ticketBean.getTicketsByStatus()}" value= "Filter "  class="btn btn-primary btn-sm"/>
+	
+	</div>
+	
+	<div class="col col-sm-6">
+	<h:outputText value="Assigned" class=" form-control-label"/>
+	<h:selectBooleanCheckbox value="#{ticketBean.assignement}" itemLabel="Basic" class="switch switch-3d switch-primary mr-3" checked="true"/>
+	<h:commandButton action="#{ticketBean.getTicketsByAssignement()}" value="Filter" class="btn btn-primary btn-sm" />
+	
+
+	<h:outputText value="show All" class="form-control-label"/>
+	<h:commandButton action="#{ticketBean.getAllTickets()}" value="Show All " class="btn btn-primary btn-sm" />           
+            
+    </div>    
+            <!-- Affichage **********************  -->
+<div class="table-responsive m-b-40">           
+<h:dataTable value="#{ticketBean.les_tickets}" var="i" class="table table-borderless table-data3" action="#{ticketBean.getAllTickets()}">
+ 
+<h:column>
+	<f:facet name="header" >
+	 	<h:outputText value="Title"/>
+	</f:facet>
+	<h:outputText value="#{i.title}"/>
+</h:column>
+
+<h:column>
+	<f:facet name="header">
+	 	<h:outputText value="Description"/>
+	</f:facet>
+	<h:outputText value="#{i.description}"/>
+</h:column>
+
+<h:column>
+	<f:facet name="header">
+	 	<h:outputText value="creation Date"/>
+	</f:facet>
+	<h:outputText value="#{i.date}">
+	<f:convertDateTime pattern="dd-mm-yyyy"/> 
+	</h:outputText>
+</h:column>
+
+<h:column>
+	<f:facet name="header">
+	 	<h:outputText value="Status"/>
+	</f:facet>
+	<h:outputText value="#{i.status}"/>
+</h:column>
+
+<h:column>
+	<f:facet name="header">
+	 	<h:outputText value="Estimated hours"/>
+	</f:facet>
+	<h:outputText value="#{i.estimatedHours}"/>
+</h:column>
+
+<h:column>
+	<f:facet name="header">
+	 	<h:outputText value="Actions"/>
+	</f:facet>
+    <h:commandButton action="#{ticketBean.redirectToAssign()}" rendered="#{not i.assignement}" value="Assign"  class="btn btn-success" >
+    			<f:setPropertyActionListener value="#{i.id}" target="#{assignBean.id}"></f:setPropertyActionListener>
+    
+   </h:commandButton>
+   
+   <h:commandButton  action="#{ticketBean.deletTicketByID(i.id)}" rendered="#{i.status == 'done'}" value="Delete" class="btn btn-danger"/>
+	
+	<h:commandButton  action="#{ticketBean.ValidateTicketByID(i.id)}" rendered="#{i.status == 'under_review'}" value="Validate" class="btn btn-success"/>
+	
+</h:column>
+
+
+ 
+
+</h:dataTable>
+
+</div>            
+            </h:form>
+
+            <!-- END MAIN CONTENT-->
+
+	</ui:define>
+
+</ui:composition>
+</html> 
